@@ -36,14 +36,10 @@ tasks/001-add-settings-screen/
 It includes:
 
 - `task.md` — task overview and scope
+- `agent-prompt.md` — prompt to give the coding agent
+- `expected-behavior.md` — acceptance criteria and expected UX behavior
 - `config.json` — automated evaluation configuration
 - `scoring.md` — human + automated scoring rubric
-
-The original agent prompt is also available in:
-
-```text
-Mira/tasks/001-add-settings-screen/agent-prompt.md
-```
 
 ## Running an Evaluation
 
