@@ -1,0 +1,13 @@
+.gitignore
+Mira/docs/product-principles.md
+Mira/tasks/001-add-settings-screen/agent-prompt.md
+Mira/tasks/001-add-settings-screen/expected-behavior.md
+Mira/tasks/001-add-settings-screen/scoring.md
+Mira/tasks/001-add-settings-screen/task.md
+README.md
+scripts/analyze-diff.py
+scripts/evaluate-run.sh
+tasks/001-add-settings-screen/config.json
+tasks/001-add-settings-screen/scoring.md
+tasks/001-add-settings-screen/task.md
+tests/test_analyze_diff.py

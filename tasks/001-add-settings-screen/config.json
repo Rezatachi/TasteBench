@@ -1,0 +1,44 @@
+{
+  "taskId": "001-add-settings-screen",
+  "taskName": "Add Settings Screen",
+  "allowedChangedPaths": [
+    "Mira/Mira/Screens/Settings/",
+    "Mira/Mira/Screens/Today/",
+    "Mira/Mira/Components/",
+    "Mira/Mira/DesignSystem/",
+    "Mira/Mira.xcodeproj/"
+  ],
+  "expectedNewFiles": [
+    "Mira/Mira/Screens/Settings/SettingsView.swift"
+  ],
+  "designTokenKeywords": [
+    "MiraColors",
+    "MiraSpacing",
+    "MiraTypography",
+    "MiraRadius",
+    "MiraShadow",
+    "MoodStyle",
+    "miraSurface"
+  ],
+  "disallowedRawColorPatterns": [
+    "Color\\.red",
+    "Color\\.blue",
+    "Color\\.green",
+    "Color\\.orange",
+    "Color\\.purple",
+    "Color\\.pink",
+    "Color\\.yellow",
+    "Color\\.black",
+    "Color\\.white",
+    "Color\\(red:",
+    "UIColor\\(",
+    "UIColor\\."
+  ],
+  "accessibilityKeywords": [
+    ".accessibilityLabel",
+    ".accessibilityHint",
+    ".accessibilityElement",
+    ".accessibilityAddTraits",
+    ".accessibilityValue"
+  ]
+}
