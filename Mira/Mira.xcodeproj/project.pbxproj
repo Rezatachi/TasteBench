@@ -1,0 +1,101 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+/* Begin PBXBuildFile section */
+		F6CC0AC1BBD579C765C0C7B1 /* MiraApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7FE06544F22AA79CCCE454 /* MiraApp.swift */; };
+		01C07CA210726DDE4B041897 /* JournalEntryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CDC8D358B2FA9F42BC00125 /* JournalEntryCard.swift */; };
+		D8A5C66A68C58BF5AC4F6F95 /* MoodTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AD33532B0232A580C25935 /* MoodTag.swift */; };
+		259824E4248EC7A35A55499C /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267581048E003DA62BE90F26 /* PrimaryButton.swift */; };
+		4F32ABDD9FDE35A8679DA8E0 /* ReflectionPromptCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9907EF706F842062EF949B6B /* ReflectionPromptCard.swift */; };
+		15135203ADE86DFB59EA82E6 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D54788610F726B54415FAD /* SectionHeader.swift */; };
+		FFABD39A262EEB714B8D55AA /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D890B4BB5EBAB12D40B8A3CE /* SampleData.swift */; };
+		152488B2EEADD7FBB811D031 /* MiraColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA5DF5790A1F1BABA510B69 /* MiraColors.swift */; };
+		1C593E96F058A03BDCF13E4B /* MiraShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB61982262BDF39BA8E50A9C /* MiraShadow.swift */; };
+		8E96C9A4D2C4B9A07BB0F9D4 /* MiraSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965CFF74F343A0B208761373 /* MiraSpacing.swift */; };
+		47FBF66974844BC9F4DA344D /* MiraTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA865265B24BE071D7A03E4D /* MiraTypography.swift */; };
+		74B0D9D96751F844427BCFE7 /* MoodStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E00F0FDC79BCA3055B5067E /* MoodStyle.swift */; };
+		188205F6E5696221EBCE9840 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD9DEBD5B66399E262015D6 /* JournalEntry.swift */; };
+		C656DB170B273147D99E3F33 /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32268CFFBBD73E3F12076A22 /* Mood.swift */; };
+		DB7D066609C7AD5EED0092F1 /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD4586461547C2982E9EB6 /* EntryDetailView.swift */; };
+		C9F367D12BF3F0F139A6581F /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1D4560DA98546D14243B0 /* JournalView.swift */; };
+		569C2533302B099E3E19DC99 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BA92E23DCD7B3021F428 /* NewEntryView.swift */; };
+		E4A51CB6C09947C38318E2E1 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C1FB0F0EC8786DF17F917B /* TodayView.swift */; };
+		BC123DF6379772F9199D1DB3 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE05772FB137D34308A6FE17 /* JournalViewModel.swift */; };
+		0D2B78F53733B93433A9E0AF /* MiraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494E79EDE797F729F1644B0 /* MiraTests.swift */; };
+		D5361EC481293F41BB216C4F /* MiraSurfaceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96ED86CB51CAA25F4FDBCD60 /* MiraSurfaceStyle.swift */; };
+/* End PBXBuildFile section */
+/* Begin PBXContainerItemProxy section */
+		C9E5BC0657D40CF0E7019B61 = {isa = PBXContainerItemProxy; containerPortal = 575DC78D2AB259A99231E26B /* Project object */; proxyType = 1; remoteGlobalIDString = FB0744D40882418CEF6AE2EE; remoteInfo = Mira; };
+/* End PBXContainerItemProxy section */
+/* Begin PBXFileReference section */
+		2A445A7AF7A627EBADD4C22D /* Mira.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mira.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D238CF127F6222F51DBF21D9 /* MiraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B7FE06544F22AA79CCCE454 /* MiraApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/MiraApp.swift; sourceTree = "<group>"; };
+		6CDC8D358B2FA9F42BC00125 /* JournalEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/JournalEntryCard.swift; sourceTree = "<group>"; };
+		59AD33532B0232A580C25935 /* MoodTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/MoodTag.swift; sourceTree = "<group>"; };
+		267581048E003DA62BE90F26 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/PrimaryButton.swift; sourceTree = "<group>"; };
+		9907EF706F842062EF949B6B /* ReflectionPromptCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/ReflectionPromptCard.swift; sourceTree = "<group>"; };
+		69D54788610F726B54415FAD /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components/SectionHeader.swift; sourceTree = "<group>"; };
+		D890B4BB5EBAB12D40B8A3CE /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data/SampleData.swift; sourceTree = "<group>"; };
+		4BA5DF5790A1F1BABA510B69 /* MiraColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MiraColors.swift; sourceTree = "<group>"; };
+		BB61982262BDF39BA8E50A9C /* MiraShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MiraShadow.swift; sourceTree = "<group>"; };
+		965CFF74F343A0B208761373 /* MiraSpacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MiraSpacing.swift; sourceTree = "<group>"; };
+		DA865265B24BE071D7A03E4D /* MiraTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MiraTypography.swift; sourceTree = "<group>"; };
+		9E00F0FDC79BCA3055B5067E /* MoodStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MoodStyle.swift; sourceTree = "<group>"; };
+		3DD9DEBD5B66399E262015D6 /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/JournalEntry.swift; sourceTree = "<group>"; };
+		32268CFFBBD73E3F12076A22 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/Mood.swift; sourceTree = "<group>"; };
+		35BD4586461547C2982E9EB6 /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/EntryDetail/EntryDetailView.swift; sourceTree = "<group>"; };
+		7DA1D4560DA98546D14243B0 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Journal/JournalView.swift; sourceTree = "<group>"; };
+		BCE5BA92E23DCD7B3021F428 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/NewEntry/NewEntryView.swift; sourceTree = "<group>"; };
+		D8C1FB0F0EC8786DF17F917B /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Today/TodayView.swift; sourceTree = "<group>"; };
+		DE05772FB137D34308A6FE17 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels/JournalViewModel.swift; sourceTree = "<group>"; };
+		0494E79EDE797F729F1644B0 /* MiraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiraTests.swift; sourceTree = "<group>"; };
+		96ED86CB51CAA25F4FDBCD60 /* MiraSurfaceStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem/MiraSurfaceStyle.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+/* Begin PBXFrameworksBuildPhase section */
+		A6F33FDCF4314A5D01AC127C = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		409B8105541839D8D683D928 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+/* Begin PBXGroup section */
+		F3701F08588186D573E90AF4 = {isa = PBXGroup; children = (828FE0C0C7835EFC7A3DAE33, A41233727142F03FDEA0B192, 9977C7609A4C913B0B0816F2); sourceTree = "<group>"; };
+		9977C7609A4C913B0B0816F2 /* Products */ = {isa = PBXGroup; children = (2A445A7AF7A627EBADD4C22D, D238CF127F6222F51DBF21D9); name = Products; sourceTree = "<group>"; };
+		828FE0C0C7835EFC7A3DAE33 /* Mira */ = {isa = PBXGroup; children = (2B7FE06544F22AA79CCCE454, 6CDC8D358B2FA9F42BC00125, 59AD33532B0232A580C25935, 267581048E003DA62BE90F26, 9907EF706F842062EF949B6B, 69D54788610F726B54415FAD, D890B4BB5EBAB12D40B8A3CE, 4BA5DF5790A1F1BABA510B69, BB61982262BDF39BA8E50A9C, 965CFF74F343A0B208761373, DA865265B24BE071D7A03E4D, 9E00F0FDC79BCA3055B5067E, 3DD9DEBD5B66399E262015D6, 32268CFFBBD73E3F12076A22, 35BD4586461547C2982E9EB6, 7DA1D4560DA98546D14243B0, BCE5BA92E23DCD7B3021F428, D8C1FB0F0EC8786DF17F917B, DE05772FB137D34308A6FE17, 96ED86CB51CAA25F4FDBCD60); path = Mira; sourceTree = "<group>"; };
+		A41233727142F03FDEA0B192 /* MiraTests */ = {isa = PBXGroup; children = (0494E79EDE797F729F1644B0); path = MiraTests; sourceTree = "<group>"; };
+/* End PBXGroup section */
+/* Begin PBXNativeTarget section */
+		FB0744D40882418CEF6AE2EE /* Mira */ = {isa = PBXNativeTarget; buildConfigurationList = 377303855D0F337296461213; buildPhases = (E268E8EA5FE899FA423B82E3, A6F33FDCF4314A5D01AC127C, 6D2713D5B5A3EEE54ED813DB); buildRules = (); dependencies = (); name = Mira; productName = Mira; productReference = 2A445A7AF7A627EBADD4C22D; productType = "com.apple.product-type.application"; };
+		5E15E2BE570A5A8F7C087433 /* MiraTests */ = {isa = PBXNativeTarget; buildConfigurationList = BC8DAFEB0A39FB7A84FFD537; buildPhases = (BCCECFED0DFCD84B895CC0D9, 409B8105541839D8D683D928, BE1915CA30AFA7BB60A4CF99); buildRules = (); dependencies = (576231A93B38A97B38496A94); name = MiraTests; productName = MiraTests; productReference = D238CF127F6222F51DBF21D9; productType = "com.apple.product-type.bundle.unit-test"; };
+/* End PBXNativeTarget section */
+/* Begin PBXProject section */
+		575DC78D2AB259A99231E26B /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = {FB0744D40882418CEF6AE2EE = {CreatedOnToolsVersion = 16.0; }; 5E15E2BE570A5A8F7C087433 = {CreatedOnToolsVersion = 16.0; TestTargetID = FB0744D40882418CEF6AE2EE; }; }; }; buildConfigurationList = D09B7BFC8FC5CF050F8E9166; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = F3701F08588186D573E90AF4; productRefGroup = 9977C7609A4C913B0B0816F2; projectDirPath = ""; projectRoot = ""; targets = (FB0744D40882418CEF6AE2EE, 5E15E2BE570A5A8F7C087433); };
+/* End PBXProject section */
+/* Begin PBXResourcesBuildPhase section */
+		6D2713D5B5A3EEE54ED813DB = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		BE1915CA30AFA7BB60A4CF99 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+/* Begin PBXSourcesBuildPhase section */
+		E268E8EA5FE899FA423B82E3 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (F6CC0AC1BBD579C765C0C7B1, 01C07CA210726DDE4B041897, D8A5C66A68C58BF5AC4F6F95, 259824E4248EC7A35A55499C, 4F32ABDD9FDE35A8679DA8E0, 15135203ADE86DFB59EA82E6, FFABD39A262EEB714B8D55AA, 152488B2EEADD7FBB811D031, 1C593E96F058A03BDCF13E4B, 8E96C9A4D2C4B9A07BB0F9D4, 47FBF66974844BC9F4DA344D, 74B0D9D96751F844427BCFE7, 188205F6E5696221EBCE9840, C656DB170B273147D99E3F33, DB7D066609C7AD5EED0092F1, C9F367D12BF3F0F139A6581F, 569C2533302B099E3E19DC99, E4A51CB6C09947C38318E2E1, BC123DF6379772F9199D1DB3, D5361EC481293F41BB216C4F); runOnlyForDeploymentPostprocessing = 0; };
+		BCCECFED0DFCD84B895CC0D9 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (0D2B78F53733B93433A9E0AF); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+/* Begin PBXTargetDependency section */
+		576231A93B38A97B38496A94 = {isa = PBXTargetDependency; target = FB0744D40882418CEF6AE2EE; targetProxy = C9E5BC0657D40CF0E7019B61; };
+/* End PBXTargetDependency section */
+/* Begin XCBuildConfiguration section */
+		39C142B3C879175C45B17A30 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; ENABLE_TESTABILITY = YES; GCC_OPTIMIZATION_LEVEL = 0; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		8015661B6D6A4744EF908916 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0; }; name = Release; };
+		BB9F146F1C3154CC32A0E083 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Mira; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tastebench.mira; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		8095ABB2EDB899A83DCB1877 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; ENABLE_PREVIEWS = YES; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = Mira; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tastebench.mira; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+		379D6CD45251B1CBE63198DB /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tastebench.miraTests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mira.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Mira"; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		AB5FBA986CDFF57E96F76D9E /* Release */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.tastebench.miraTests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mira.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Mira"; }; name = Release; };
+/* End XCBuildConfiguration section */
+/* Begin XCConfigurationList section */
+		D09B7BFC8FC5CF050F8E9166 = {isa = XCConfigurationList; buildConfigurations = (39C142B3C879175C45B17A30, 8015661B6D6A4744EF908916); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		377303855D0F337296461213 = {isa = XCConfigurationList; buildConfigurations = (BB9F146F1C3154CC32A0E083, 8095ABB2EDB899A83DCB1877); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		BC8DAFEB0A39FB7A84FFD537 = {isa = XCConfigurationList; buildConfigurations = (379D6CD45251B1CBE63198DB, AB5FBA986CDFF57E96F76D9E); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+	};
+	rootObject = 575DC78D2AB259A99231E26B /* Project object */;
+}
