@@ -1,0 +1,229 @@
+{
+  "summary": {
+    "generatedAt": "2026-05-09T19:34:18.326536+00:00",
+    "runCount": 4,
+    "scoredRunCount": 3,
+    "averageHumanScore": 19.83,
+    "automatedBuildAndTestPassCount": 4,
+    "automatedPassButHumanBlockedCount": 1,
+    "agents": [
+      "claude-code",
+      "codex",
+      "hermes"
+    ],
+    "tasks": [
+      "001-add-settings-screen",
+      "002-journal-empty-state"
+    ]
+  },
+  "runs": [
+    {
+      "taskId": "001-add-settings-screen",
+      "taskName": "Add Settings Screen",
+      "agent": "claude-code",
+      "status": "completed",
+      "timestamp": "2026-05-02T21:44:02.277765Z",
+      "automatedChecks": {
+        "buildPassed": true,
+        "testsPassed": true,
+        "filesChanged": 13,
+        "linesAdded": 933,
+        "linesRemoved": 0,
+        "rawColorUsages": 0,
+        "designTokenReferences": 0,
+        "accessibilityReferences": 0,
+        "unrelatedFilesChanged": [
+          ".gitignore",
+          "Mira/docs/product-principles.md",
+          "Mira/tasks/001-add-settings-screen/agent-prompt.md",
+          "Mira/tasks/001-add-settings-screen/expected-behavior.md",
+          "Mira/tasks/001-add-settings-screen/scoring.md",
+          "Mira/tasks/001-add-settings-screen/task.md",
+          "README.md",
+          "scripts/analyze-diff.py",
+          "scripts/evaluate-run.sh",
+          "tasks/001-add-settings-screen/config.json",
+          "tasks/001-add-settings-screen/scoring.md",
+          "tasks/001-add-settings-screen/task.md",
+          "tests/test_analyze_diff.py"
+        ]
+      },
+      "scores": {
+        "functionalCorrectness": null,
+        "buildAndTestHealth": null,
+        "visualConsistency": null,
+        "designSystemAdherence": null,
+        "interactionQuality": null,
+        "restraint": null,
+        "accessibility": null,
+        "regressionRisk": null
+      },
+      "totalScore": null,
+      "maxScore": 24,
+      "shipReadiness": null,
+      "summary": "Automated checks generated. Human review is still required for taste, visual consistency, restraint, copy quality, and final ship readiness.",
+      "resultPath": "runs/claude-code/001-add-settings-screen/result.json",
+      "humanReviewPath": "runs/claude-code/001-add-settings-screen/human-review.md"
+    },
+    {
+      "taskId": "001-add-settings-screen",
+      "taskName": "Add Settings Screen",
+      "agent": "codex",
+      "status": "completed",
+      "timestamp": "2026-05-02T22:58:12.179876Z",
+      "automatedChecks": {
+        "buildPassed": true,
+        "testsPassed": true,
+        "filesChanged": 3,
+        "linesAdded": 197,
+        "linesRemoved": 2,
+        "rawColorUsages": 0,
+        "designTokenReferences": 69,
+        "accessibilityReferences": 2,
+        "unrelatedFilesChanged": []
+      },
+      "scores": {
+        "functionalCorrectness": 3,
+        "buildAndTestHealth": 3,
+        "visualConsistency": 1,
+        "designSystemAdherence": 1.5,
+        "interactionQuality": 1,
+        "restraint": 2,
+        "accessibility": 1.5,
+        "regressionRisk": 2
+      },
+      "totalScore": 15.0,
+      "maxScore": 24,
+      "shipReadiness": "no",
+      "summary": "Automated checks passed, but human review found severe product-quality issues: padding/layout problems, slow animations, and misaligned text. Not ship-ready without visual and interaction polish.",
+      "humanReviewNotes": [
+        "Severe padding issues throughout the Codex settings implementation.",
+        "Animations feel slow and degrade interaction quality.",
+        "Text alignment is visibly off/misaligned.",
+        "Automated build/test checks passed, but product-quality review blocks ship readiness."
+      ],
+      "extendedScores": {
+        "reviewability": {
+          "score": 3,
+          "maxScore": 4,
+          "notes": "Diff artifacts, result.json, and human-review.md make the run inspectable, but the agent did not provide enough rationale, source trail, rollback framing, or uncertainty to earn full credit."
+        }
+      },
+      "evaluationPrinciples": [
+        "Evaluate persistence, not just task completion: preserve product intent across refactors, UI changes, interruptions, and follow-up work.",
+        "Score reviewability: diffs, rationale, source trails, rollback points, and uncertainty should make the work easy to inspect.",
+        "Add surface-neutrality tests across IDE, CLI, chat, browser, and design-tool workflows."
+      ],
+      "resultPath": "runs/codex/001-add-settings-screen/result.json",
+      "humanReviewPath": "runs/codex/001-add-settings-screen/human-review.md"
+    },
+    {
+      "taskId": "002-journal-empty-state",
+      "taskName": "Journal Empty State",
+      "agent": "codex",
+      "status": "completed",
+      "timestamp": "2026-05-09T19:31:12.696185Z",
+      "automatedChecks": {
+        "buildPassed": true,
+        "testsPassed": true,
+        "filesChanged": 1,
+        "linesAdded": 46,
+        "linesRemoved": 7,
+        "rawColorUsages": 0,
+        "designTokenReferences": 20,
+        "accessibilityReferences": 3,
+        "unrelatedFilesChanged": []
+      },
+      "scores": {
+        "functionalCorrectness": 3,
+        "buildAndTestHealth": 3,
+        "visualConsistency": 2.3,
+        "designSystemAdherence": 2.5,
+        "interactionQuality": 3,
+        "restraint": 2.4,
+        "accessibility": 2.5,
+        "regressionRisk": 3
+      },
+      "totalScore": 21.7,
+      "maxScore": 24,
+      "shipReadiness": "yes-with-polish",
+      "summary": "Automated checks passed and the implementation is broadly product-aligned. Human review finds it shippable with polish: the empty state is calm and functional, but the all-caps eyebrow, extra hierarchy, and slightly terse CTA make it feel a bit more designed/constructed than Mira's quietest moments.",
+      "humanReviewNotes": [
+        "Correctly gates the empty state on zero entries and preserves the populated list path.",
+        "Uses existing Mira tokens, surface styling, and PrimaryButton with no raw colors.",
+        "Copy is warm and non-generic, especially the body guidance around one moment/feeling.",
+        "The uppercased eyebrow plus title/body creates a more formal empty-state component; acceptable, but a little less restrained than ideal.",
+        "CTA 'Write first reflection' is clear but slightly clipped compared with the more human 'Write your first reflection'.",
+        "Automated checks pass, but they cannot distinguish these copy/hierarchy nuances."
+      ],
+      "extendedScores": {
+        "reviewability": {
+          "score": 3.2,
+          "maxScore": 4,
+          "notes": "Diff is small, isolated, and easy to inspect. Extracting entryList improves readability, though the agent did not leave much rationale beyond the code and generated artifacts."
+        }
+      },
+      "evaluationPrinciples": [
+        "Automated build/test/diff checks are necessary but insufficient for product taste.",
+        "Human review should inspect copy, hierarchy, restraint, and whether the work feels native to Mira.",
+        "Small diffs can still vary meaningfully in product quality."
+      ],
+      "resultPath": "runs/codex/002-journal-empty-state/result.json",
+      "humanReviewPath": "runs/codex/002-journal-empty-state/human-review.md"
+    },
+    {
+      "taskId": "002-journal-empty-state",
+      "taskName": "Journal Empty State",
+      "agent": "hermes",
+      "status": "completed",
+      "timestamp": "2026-05-09T19:31:39.554211Z",
+      "automatedChecks": {
+        "buildPassed": true,
+        "testsPassed": true,
+        "filesChanged": 1,
+        "linesAdded": 35,
+        "linesRemoved": 5,
+        "rawColorUsages": 0,
+        "designTokenReferences": 17,
+        "accessibilityReferences": 3,
+        "unrelatedFilesChanged": []
+      },
+      "scores": {
+        "functionalCorrectness": 3,
+        "buildAndTestHealth": 3,
+        "visualConsistency": 2.7,
+        "designSystemAdherence": 2.7,
+        "interactionQuality": 3,
+        "restraint": 2.8,
+        "accessibility": 2.6,
+        "regressionRisk": 3
+      },
+      "totalScore": 22.8,
+      "maxScore": 24,
+      "shipReadiness": "yes",
+      "summary": "Automated checks passed and human review finds the result ship-ready. The implementation is narrow, calm, and product-sensitive; the copy feels more human and less generic than a typical empty state, with only minor polish questions around the surfaced card treatment/shadow.",
+      "humanReviewNotes": [
+        "Correctly gates the empty state on zero entries and preserves the existing populated Journal behavior.",
+        "Primary action opens the existing New Entry sheet and uses PrimaryButton.",
+        "Copy is calm, specific, and human: 'a few honest lines' fits Mira's reflection-first product voice.",
+        "The implementation is smaller than Codex's and avoids a separate all-caps eyebrow, making the hierarchy feel more restrained.",
+        "Use of surface shadow is acceptable but worth checking visually against Mira's quiet editorial tone.",
+        "Automated checks pass, but the strongest signal here is the qualitative fit of the copy and restraint."
+      ],
+      "extendedScores": {
+        "reviewability": {
+          "score": 3.4,
+          "maxScore": 4,
+          "notes": "Diff is very small and limited to one file. The subagent returned a clear summary and caveats, but rollback framing and explicit uncertainty could still be stronger."
+        }
+      },
+      "evaluationPrinciples": [
+        "Automated build/test/diff checks are necessary but insufficient for product taste.",
+        "Human review should inspect copy, hierarchy, restraint, and whether the work feels native to Mira.",
+        "Small diffs can still vary meaningfully in product quality."
+      ],
+      "resultPath": "runs/hermes/002-journal-empty-state/result.json",
+      "humanReviewPath": "runs/hermes/002-journal-empty-state/human-review.md"
+    }
+  ]
+}

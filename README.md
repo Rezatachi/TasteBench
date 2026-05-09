@@ -130,6 +130,23 @@ XCODE_DESTINATION='platform=iOS Simulator,name=iPhone 15,OS=18.5' \
 ./scripts/evaluate-run.sh 001-add-settings-screen claude-code
 ```
 
+## Reporting / Portfolio Snapshot
+
+Generate dashboard-ready JSON plus a markdown portfolio snapshot from all `runs/*/*/result.json` files:
+
+```bash
+./scripts/generate-report.py
+```
+
+This writes:
+
+```text
+reports/dashboard-data.json      # structured data for a future web dashboard
+reports/portfolio-snapshot.md    # readable benchmark findings for portfolio/X posts
+```
+
+The report intentionally separates automated signals from human product review so it can show cases where build/tests pass but taste or ship-readiness still fail.
+
 ## Testing the Evaluation Tooling
 
 Run:

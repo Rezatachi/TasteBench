@@ -1,0 +1,57 @@
+diff --git a/Mira/Mira/Screens/Journal/JournalView.swift b/Mira/Mira/Screens/Journal/JournalView.swift
+index 0e19c3a..bd4af70 100644
+--- a/Mira/Mira/Screens/Journal/JournalView.swift
++++ b/Mira/Mira/Screens/Journal/JournalView.swift
+@@ -12,12 +12,16 @@ struct JournalView: View {
+                     .foregroundStyle(MiraColors.textPrimary)
+                     .frame(maxWidth: .infinity, alignment: .leading)
+ 
+-                LazyVStack(spacing: MiraSpacing.md) {
+-                    ForEach(viewModel.entries) { entry in
+-                        NavigationLink(destination: EntryDetailView(entry: entry)) {
+-                            JournalEntryCard(entry: entry)
++                if viewModel.entries.isEmpty {
++                    journalEmptyState
++                } else {
++                    LazyVStack(spacing: MiraSpacing.md) {
++                        ForEach(viewModel.entries) { entry in
++                            NavigationLink(destination: EntryDetailView(entry: entry)) {
++                                JournalEntryCard(entry: entry)
++                            }
++                            .buttonStyle(.plain)
+                         }
+-                        .buttonStyle(.plain)
+                     }
+                 }
+             }
+@@ -39,4 +43,30 @@ struct JournalView: View {
+             NewEntryView(viewModel: viewModel)
+         }
+     }
++
++    private var journalEmptyState: some View {
++        VStack(alignment: .leading, spacing: MiraSpacing.lg) {
++            VStack(alignment: .leading, spacing: MiraSpacing.sm) {
++                Text("A quiet place to begin")
++                    .font(MiraTypography.title)
++                    .foregroundStyle(MiraColors.textPrimary)
++                    .fixedSize(horizontal: false, vertical: true)
++
++                Text("Your first reflection can be a few honest lines — something you noticed, felt, or want to remember from today.")
++                    .font(MiraTypography.body)
++                    .foregroundStyle(MiraColors.textSecondary)
++                    .lineSpacing(3)
++                    .fixedSize(horizontal: false, vertical: true)
++            }
++
++            PrimaryButton(title: "Write your first reflection", systemImage: "square.and.pencil") {
++                isShowingNewEntry = true
++            }
++            .accessibilityHint("Opens a new journal entry")
++        }
++        .padding(MiraSpacing.lg)
++        .frame(maxWidth: .infinity, alignment: .leading)
++        .miraSurface(cornerRadius: MiraRadius.lg, borderOpacity: 0.65, shadow: true)
++        .accessibilityElement(children: .contain)
++    }
+ }

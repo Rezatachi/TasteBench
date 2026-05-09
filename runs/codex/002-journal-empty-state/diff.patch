@@ -1,0 +1,69 @@
+diff --git a/Mira/Mira/Screens/Journal/JournalView.swift b/Mira/Mira/Screens/Journal/JournalView.swift
+index 0e19c3a..8e52a79 100644
+--- a/Mira/Mira/Screens/Journal/JournalView.swift
++++ b/Mira/Mira/Screens/Journal/JournalView.swift
+@@ -12,13 +12,10 @@ struct JournalView: View {
+                     .foregroundStyle(MiraColors.textPrimary)
+                     .frame(maxWidth: .infinity, alignment: .leading)
+ 
+-                LazyVStack(spacing: MiraSpacing.md) {
+-                    ForEach(viewModel.entries) { entry in
+-                        NavigationLink(destination: EntryDetailView(entry: entry)) {
+-                            JournalEntryCard(entry: entry)
+-                        }
+-                        .buttonStyle(.plain)
+-                    }
++                if viewModel.entries.isEmpty {
++                    emptyState
++                } else {
++                    entryList
+                 }
+             }
+             .padding(MiraSpacing.lg)
+@@ -39,4 +36,46 @@ struct JournalView: View {
+             NewEntryView(viewModel: viewModel)
+         }
+     }
++
++    private var entryList: some View {
++        LazyVStack(spacing: MiraSpacing.md) {
++            ForEach(viewModel.entries) { entry in
++                NavigationLink(destination: EntryDetailView(entry: entry)) {
++                    JournalEntryCard(entry: entry)
++                }
++                .buttonStyle(.plain)
++            }
++        }
++    }
++
++    private var emptyState: some View {
++        VStack(alignment: .leading, spacing: MiraSpacing.lg) {
++            VStack(alignment: .leading, spacing: MiraSpacing.sm) {
++                Text("A quiet place to begin".uppercased())
++                    .font(MiraTypography.caption)
++                    .tracking(1.2)
++                    .foregroundStyle(MiraColors.textSecondary)
++
++                Text("Your first reflection can be small.")
++                    .font(MiraTypography.title)
++                    .foregroundStyle(MiraColors.textPrimary)
++                    .lineSpacing(4)
++
++                Text("Start with one moment, one feeling, or one thing you want to remember from today.")
++                    .font(MiraTypography.body)
++                    .foregroundStyle(MiraColors.textSecondary)
++                    .lineSpacing(3)
++                    .padding(.top, MiraSpacing.xs)
++            }
++
++            PrimaryButton(title: "Write first reflection", systemImage: "square.and.pencil") {
++                isShowingNewEntry = true
++            }
++            .accessibilityHint("Opens a new reflection")
++        }
++        .frame(maxWidth: .infinity, alignment: .leading)
++        .padding(MiraSpacing.lg)
++        .miraSurface(cornerRadius: MiraRadius.xl, borderOpacity: 0.7)
++        .accessibilityElement(children: .contain)
++    }
+ }
