@@ -24,6 +24,15 @@ struct TodayView: View {
             }
             .background(MiraColors.background.ignoresSafeArea())
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape")
+                    }
+                    .tint(MiraColors.accent)
+                    .accessibilityLabel("Settings")
+                }
+            }
             .sheet(isPresented: $isShowingNewEntry) {
                 NewEntryView(viewModel: viewModel)
             }

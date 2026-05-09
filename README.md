@@ -96,6 +96,21 @@ The core thesis is:
 
 > Some parts of product quality can be automated. The final judgment still requires human taste.
 
+
+## Evaluation Philosophy
+
+TasteBench should evaluate persistence, not just task completion. Coding/design agents should be tested on whether they preserve product intent across refactors, UI changes, interruptions, and repeated work.
+
+TasteBench should also score **reviewability**: whether an agent makes its work easy to inspect through readable diffs, rationale, source trails, rollback points, and explicit uncertainty.
+
+Future benchmark suites should add **surface-neutrality tests** across IDE, CLI, chat, browser, and design-tool workflows, because real builders move between surfaces constantly.
+
+See:
+
+```text
+docs/evaluation-principles.md
+```
+
 ## Configuring Build and Test Commands
 
 The evaluator defaults to:

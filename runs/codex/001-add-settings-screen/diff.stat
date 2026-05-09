@@ -1,0 +1,4 @@
+ Mira/Mira.xcodeproj/project.pbxproj           |   6 +-
+ Mira/Mira/Screens/Settings/SettingsView.swift | 184 ++++++++++++++++++++++++++
+ Mira/Mira/Screens/Today/TodayView.swift       |   9 ++
+ 3 files changed, 197 insertions(+), 2 deletions(-)

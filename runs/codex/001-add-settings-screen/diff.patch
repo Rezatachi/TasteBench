@@ -1,0 +1,248 @@
+diff --git a/Mira/Mira.xcodeproj/project.pbxproj b/Mira/Mira.xcodeproj/project.pbxproj
+index 64157d8..884a06e 100644
+--- a/Mira/Mira.xcodeproj/project.pbxproj
++++ b/Mira/Mira.xcodeproj/project.pbxproj
+@@ -22,6 +22,7 @@
+ 		DB7D066609C7AD5EED0092F1 /* EntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BD4586461547C2982E9EB6 /* EntryDetailView.swift */; };
+ 		C9F367D12BF3F0F139A6581F /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA1D4560DA98546D14243B0 /* JournalView.swift */; };
+ 		569C2533302B099E3E19DC99 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BA92E23DCD7B3021F428 /* NewEntryView.swift */; };
++		5E931393E72C4E0EA7AC2A62 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E2D61872B704D1A9D20758D /* SettingsView.swift */; };
+ 		E4A51CB6C09947C38318E2E1 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C1FB0F0EC8786DF17F917B /* TodayView.swift */; };
+ 		BC123DF6379772F9199D1DB3 /* JournalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE05772FB137D34308A6FE17 /* JournalViewModel.swift */; };
+ 		0D2B78F53733B93433A9E0AF /* MiraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494E79EDE797F729F1644B0 /* MiraTests.swift */; };
+@@ -50,6 +51,7 @@
+ 		35BD4586461547C2982E9EB6 /* EntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/EntryDetail/EntryDetailView.swift; sourceTree = "<group>"; };
+ 		7DA1D4560DA98546D14243B0 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Journal/JournalView.swift; sourceTree = "<group>"; };
+ 		BCE5BA92E23DCD7B3021F428 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/NewEntry/NewEntryView.swift; sourceTree = "<group>"; };
++		1E2D61872B704D1A9D20758D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Settings/SettingsView.swift; sourceTree = "<group>"; };
+ 		D8C1FB0F0EC8786DF17F917B /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens/Today/TodayView.swift; sourceTree = "<group>"; };
+ 		DE05772FB137D34308A6FE17 /* JournalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModels/JournalViewModel.swift; sourceTree = "<group>"; };
+ 		0494E79EDE797F729F1644B0 /* MiraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiraTests.swift; sourceTree = "<group>"; };
+@@ -62,7 +64,7 @@
+ /* Begin PBXGroup section */
+ 		F3701F08588186D573E90AF4 = {isa = PBXGroup; children = (828FE0C0C7835EFC7A3DAE33, A41233727142F03FDEA0B192, 9977C7609A4C913B0B0816F2); sourceTree = "<group>"; };
+ 		9977C7609A4C913B0B0816F2 /* Products */ = {isa = PBXGroup; children = (2A445A7AF7A627EBADD4C22D, D238CF127F6222F51DBF21D9); name = Products; sourceTree = "<group>"; };
+-		828FE0C0C7835EFC7A3DAE33 /* Mira */ = {isa = PBXGroup; children = (2B7FE06544F22AA79CCCE454, 6CDC8D358B2FA9F42BC00125, 59AD33532B0232A580C25935, 267581048E003DA62BE90F26, 9907EF706F842062EF949B6B, 69D54788610F726B54415FAD, D890B4BB5EBAB12D40B8A3CE, 4BA5DF5790A1F1BABA510B69, BB61982262BDF39BA8E50A9C, 965CFF74F343A0B208761373, DA865265B24BE071D7A03E4D, 9E00F0FDC79BCA3055B5067E, 3DD9DEBD5B66399E262015D6, 32268CFFBBD73E3F12076A22, 35BD4586461547C2982E9EB6, 7DA1D4560DA98546D14243B0, BCE5BA92E23DCD7B3021F428, D8C1FB0F0EC8786DF17F917B, DE05772FB137D34308A6FE17, 96ED86CB51CAA25F4FDBCD60); path = Mira; sourceTree = "<group>"; };
++		828FE0C0C7835EFC7A3DAE33 /* Mira */ = {isa = PBXGroup; children = (2B7FE06544F22AA79CCCE454, 6CDC8D358B2FA9F42BC00125, 59AD33532B0232A580C25935, 267581048E003DA62BE90F26, 9907EF706F842062EF949B6B, 69D54788610F726B54415FAD, D890B4BB5EBAB12D40B8A3CE, 4BA5DF5790A1F1BABA510B69, BB61982262BDF39BA8E50A9C, 965CFF74F343A0B208761373, DA865265B24BE071D7A03E4D, 9E00F0FDC79BCA3055B5067E, 3DD9DEBD5B66399E262015D6, 32268CFFBBD73E3F12076A22, 35BD4586461547C2982E9EB6, 7DA1D4560DA98546D14243B0, BCE5BA92E23DCD7B3021F428, 1E2D61872B704D1A9D20758D, D8C1FB0F0EC8786DF17F917B, DE05772FB137D34308A6FE17, 96ED86CB51CAA25F4FDBCD60); path = Mira; sourceTree = "<group>"; };
+ 		A41233727142F03FDEA0B192 /* MiraTests */ = {isa = PBXGroup; children = (0494E79EDE797F729F1644B0); path = MiraTests; sourceTree = "<group>"; };
+ /* End PBXGroup section */
+ /* Begin PBXNativeTarget section */
+@@ -77,7 +79,7 @@
+ 		BE1915CA30AFA7BB60A4CF99 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+ /* End PBXResourcesBuildPhase section */
+ /* Begin PBXSourcesBuildPhase section */
+-		E268E8EA5FE899FA423B82E3 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (F6CC0AC1BBD579C765C0C7B1, 01C07CA210726DDE4B041897, D8A5C66A68C58BF5AC4F6F95, 259824E4248EC7A35A55499C, 4F32ABDD9FDE35A8679DA8E0, 15135203ADE86DFB59EA82E6, FFABD39A262EEB714B8D55AA, 152488B2EEADD7FBB811D031, 1C593E96F058A03BDCF13E4B, 8E96C9A4D2C4B9A07BB0F9D4, 47FBF66974844BC9F4DA344D, 74B0D9D96751F844427BCFE7, 188205F6E5696221EBCE9840, C656DB170B273147D99E3F33, DB7D066609C7AD5EED0092F1, C9F367D12BF3F0F139A6581F, 569C2533302B099E3E19DC99, E4A51CB6C09947C38318E2E1, BC123DF6379772F9199D1DB3, D5361EC481293F41BB216C4F); runOnlyForDeploymentPostprocessing = 0; };
++		E268E8EA5FE899FA423B82E3 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (F6CC0AC1BBD579C765C0C7B1, 01C07CA210726DDE4B041897, D8A5C66A68C58BF5AC4F6F95, 259824E4248EC7A35A55499C, 4F32ABDD9FDE35A8679DA8E0, 15135203ADE86DFB59EA82E6, FFABD39A262EEB714B8D55AA, 152488B2EEADD7FBB811D031, 1C593E96F058A03BDCF13E4B, 8E96C9A4D2C4B9A07BB0F9D4, 47FBF66974844BC9F4DA344D, 74B0D9D96751F844427BCFE7, 188205F6E5696221EBCE9840, C656DB170B273147D99E3F33, DB7D066609C7AD5EED0092F1, C9F367D12BF3F0F139A6581F, 569C2533302B099E3E19DC99, 5E931393E72C4E0EA7AC2A62, E4A51CB6C09947C38318E2E1, BC123DF6379772F9199D1DB3, D5361EC481293F41BB216C4F); runOnlyForDeploymentPostprocessing = 0; };
+ 		BCCECFED0DFCD84B895CC0D9 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (0D2B78F53733B93433A9E0AF); runOnlyForDeploymentPostprocessing = 0; };
+ /* End PBXSourcesBuildPhase section */
+ /* Begin PBXTargetDependency section */
+diff --git a/Mira/Mira/Screens/Settings/SettingsView.swift b/Mira/Mira/Screens/Settings/SettingsView.swift
+new file mode 100644
+index 0000000..f96b484
+--- /dev/null
++++ b/Mira/Mira/Screens/Settings/SettingsView.swift
+@@ -0,0 +1,184 @@
++import SwiftUI
++
++struct SettingsView: View {
++    private enum AppearancePreference: String, CaseIterable, Identifiable {
++        case system = "System"
++        case light = "Light"
++        case dark = "Dark"
++
++        var id: String { rawValue }
++    }
++
++    @State private var appearance: AppearancePreference = .system
++    @State private var allowsReflections = true
++
++    var body: some View {
++        ScrollView(showsIndicators: false) {
++            VStack(alignment: .leading, spacing: MiraSpacing.xl) {
++                header
++                profileRow
++                preferencesSection
++                privacySection
++                signOutButton
++            }
++            .padding(MiraSpacing.lg)
++        }
++        .background(MiraColors.background.ignoresSafeArea())
++        .navigationBarTitleDisplayMode(.inline)
++        .toolbar {
++            ToolbarItem(placement: .principal) {
++                Text("Settings")
++                    .font(MiraTypography.caption)
++                    .foregroundStyle(MiraColors.textSecondary)
++            }
++        }
++    }
++
++    private var header: some View {
++        VStack(alignment: .leading, spacing: MiraSpacing.sm) {
++            Text("A quieter Mira")
++                .font(MiraTypography.title)
++                .foregroundStyle(MiraColors.textPrimary)
++            Text("Small preferences for how reflection fits into your day.")
++                .font(MiraTypography.bodySans)
++                .foregroundStyle(MiraColors.textSecondary)
++        }
++        .frame(maxWidth: .infinity, alignment: .leading)
++    }
++
++    private var profileRow: some View {
++        HStack(spacing: MiraSpacing.md) {
++            Image(systemName: "person.crop.circle")
++                .font(.system(size: 34, weight: .regular))
++                .foregroundStyle(MiraColors.accent)
++                .frame(width: 46, height: 46)
++                .background(MiraColors.accent.opacity(0.12), in: Circle())
++
++            VStack(alignment: .leading, spacing: MiraSpacing.xs) {
++                Text("Personal journal")
++                    .font(MiraTypography.heading)
++                    .foregroundStyle(MiraColors.textPrimary)
++                Text("Reflection space")
++                    .font(MiraTypography.caption)
++                    .foregroundStyle(MiraColors.textSecondary)
++            }
++
++            Spacer()
++        }
++        .padding(MiraSpacing.lg)
++        .miraSurface(cornerRadius: MiraRadius.lg, borderOpacity: 0.5)
++    }
++
++    private var preferencesSection: some View {
++        VStack(alignment: .leading, spacing: MiraSpacing.md) {
++            SectionHeader(eyebrow: "Preferences", title: "How Mira feels")
++
++            VStack(spacing: 0) {
++                settingsRow(title: "Appearance", subtitle: "Follow your preferred reading light") {
++                    Picker("Appearance", selection: $appearance) {
++                        ForEach(AppearancePreference.allCases) { option in
++                            Text(option.rawValue).tag(option)
++                        }
++                    }
++                    .pickerStyle(.menu)
++                    .tint(MiraColors.accent)
++                }
++
++                divider
++
++                settingsRow(title: "Notifications", subtitle: "A gentle reflection reminder") {
++                    Toggle("Notifications", isOn: $allowsReflections)
++                        .labelsHidden()
++                        .tint(MiraColors.accent)
++                }
++            }
++            .miraSurface(cornerRadius: MiraRadius.lg, borderOpacity: 0.5)
++        }
++    }
++
++    private var privacySection: some View {
++        VStack(alignment: .leading, spacing: MiraSpacing.md) {
++            SectionHeader(eyebrow: "Privacy", title: "Your entries stay close")
++
++            VStack(alignment: .leading, spacing: 0) {
++                privacyRow(
++                    systemImage: "lock",
++                    title: "On-device journal",
++                    subtitle: "This prototype keeps reflections local to the app."
++                )
++
++                divider
++
++                privacyRow(
++                    systemImage: "hand.raised",
++                    title: "No account required",
++                    subtitle: "Mira does not add sign-in or cloud sync here."
++                )
++            }
++            .miraSurface(cornerRadius: MiraRadius.lg, borderOpacity: 0.5)
++        }
++    }
++
++    private var signOutButton: some View {
++        Button {} label: {
++            Text("Sign out")
++                .font(MiraTypography.caption)
++                .foregroundStyle(MiraColors.accent)
++                .frame(maxWidth: .infinity)
++                .padding(.vertical, 15)
++                .miraSurface(cornerRadius: MiraRadius.md, borderOpacity: 0.5)
++        }
++        .buttonStyle(.plain)
++        .accessibilityHint("Account actions are not enabled in this version of Mira")
++    }
++
++    private var divider: some View {
++        Rectangle()
++            .fill(MiraColors.border.opacity(0.6))
++            .frame(height: 1)
++            .padding(.leading, MiraSpacing.lg)
++    }
++
++    private func settingsRow<Accessory: View>(
++        title: String,
++        subtitle: String,
++        @ViewBuilder accessory: () -> Accessory
++    ) -> some View {
++        HStack(spacing: MiraSpacing.md) {
++            VStack(alignment: .leading, spacing: MiraSpacing.xs) {
++                Text(title)
++                    .font(MiraTypography.bodySans.weight(.semibold))
++                    .foregroundStyle(MiraColors.textPrimary)
++                Text(subtitle)
++                    .font(MiraTypography.caption)
++                    .foregroundStyle(MiraColors.textSecondary)
++            }
++
++            Spacer(minLength: MiraSpacing.md)
++
++            accessory()
++        }
++        .padding(MiraSpacing.lg)
++    }
++
++    private func privacyRow(systemImage: String, title: String, subtitle: String) -> some View {
++        HStack(alignment: .top, spacing: MiraSpacing.md) {
++            Image(systemName: systemImage)
++                .font(.system(size: 16, weight: .semibold))
++                .foregroundStyle(MiraColors.accent)
++                .frame(width: 28, height: 28)
++                .background(MiraColors.accent.opacity(0.10), in: Circle())
++
++            VStack(alignment: .leading, spacing: MiraSpacing.xs) {
++                Text(title)
++                    .font(MiraTypography.bodySans.weight(.semibold))
++                    .foregroundStyle(MiraColors.textPrimary)
++                Text(subtitle)
++                    .font(MiraTypography.caption)
++                    .foregroundStyle(MiraColors.textSecondary)
++                    .fixedSize(horizontal: false, vertical: true)
++            }
++        }
++        .padding(MiraSpacing.lg)
++    }
++}
+diff --git a/Mira/Mira/Screens/Today/TodayView.swift b/Mira/Mira/Screens/Today/TodayView.swift
+index 14ca98e..98537d7 100644
+--- a/Mira/Mira/Screens/Today/TodayView.swift
++++ b/Mira/Mira/Screens/Today/TodayView.swift
+@@ -24,6 +24,15 @@ struct TodayView: View {
+             }
+             .background(MiraColors.background.ignoresSafeArea())
+             .navigationBarTitleDisplayMode(.inline)
++            .toolbar {
++                ToolbarItem(placement: .topBarTrailing) {
++                    NavigationLink(destination: SettingsView()) {
++                        Image(systemName: "gearshape")
++                    }
++                    .tint(MiraColors.accent)
++                    .accessibilityLabel("Settings")
++                }
++            }
+             .sheet(isPresented: $isShowingNewEntry) {
+                 NewEntryView(viewModel: viewModel)
+             }

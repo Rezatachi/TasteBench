@@ -55,3 +55,22 @@ Score out of 24.
 The evaluation script can measure build status, tests, diff size, changed files, raw color heuristics, design-token references, and accessibility references.
 
 Human review is still required for visual consistency, restraint, copy quality, interaction quality, and final ship readiness.
+
+## Additional Cross-Task Evaluation Dimensions
+
+These dimensions are tracked separately from the 24-point Task 001 task score for now, but should become first-class in broader TasteBench suites.
+
+### Reviewability — 4 points
+
+- 1: Diff is easy to inspect and limited to relevant files.
+- 1: Agent rationale is clear enough for a reviewer to understand key decisions.
+- 1: Source trail is clear: task docs, product principles, and changed files are easy to connect.
+- 1: Rollback points and uncertainty are explicit enough to support safe review.
+
+### Persistence
+
+Evaluate whether the agent preserves product intent across refactors, follow-up edits, interruptions, and multi-step work — not just whether it completes the immediate task.
+
+### Surface Neutrality
+
+Evaluate agent quality across IDE, CLI, chat, browser, and design-tool workflows so the benchmark does not overfit to one interaction surface.

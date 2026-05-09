@@ -1,0 +1,45 @@
+{
+  "taskId": "002-journal-empty-state",
+  "taskName": "Journal Empty State",
+  "allowedChangedPaths": [
+    "Mira/Mira/Screens/Journal/",
+    "Mira/Mira/Screens/NewEntry/",
+    "Mira/Mira/Components/",
+    "Mira/Mira/DesignSystem/",
+    "Mira/Mira/ViewModels/",
+    "Mira/MiraTests/",
+    "Mira/Mira.xcodeproj/"
+  ],
+  "expectedNewFiles": [],
+  "designTokenKeywords": [
+    "MiraColors",
+    "MiraSpacing",
+    "MiraTypography",
+    "MiraRadius",
+    "MiraShadow",
+    "MoodStyle",
+    "miraSurface",
+    "PrimaryButton"
+  ],
+  "disallowedRawColorPatterns": [
+    "Color\\.red",
+    "Color\\.blue",
+    "Color\\.green",
+    "Color\\.orange",
+    "Color\\.purple",
+    "Color\\.pink",
+    "Color\\.yellow",
+    "Color\\.black",
+    "Color\\.white",
+    "Color\\(red:",
+    "UIColor\\(",
+    "UIColor\\."
+  ],
+  "accessibilityKeywords": [
+    ".accessibilityLabel",
+    ".accessibilityHint",
+    ".accessibilityElement",
+    ".accessibilityAddTraits",
+    ".accessibilityValue"
+  ]
+}
