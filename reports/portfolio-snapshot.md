@@ -16,7 +16,7 @@ TasteBench evaluates whether AI coding agents can make product-quality app chang
 
 | Task | Agent | Build | Tests | Files | + / - | Human score | Ship readiness |
 | --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| 001-add-settings-screen | claude-code | True | True | 13 | 933 / 0 | pending | pending |
+| 001-add-settings-screen | claude-code | True | True | 13 | 933 / 0 | pending | invalid-run |
 | 001-add-settings-screen | codex | True | True | 3 | 197 / 2 | 15.0/24 | no |
 | 002-journal-empty-state | codex | True | True | 1 | 46 / 7 | 21.7/24 | yes-with-polish |
 | 002-journal-empty-state | hermes | True | True | 1 | 35 / 5 | 22.8/24 | yes |
@@ -34,7 +34,7 @@ TasteBench evaluates whether AI coding agents can make product-quality app chang
 Result: `runs/claude-code/001-add-settings-screen/result.json`
 Human review: `runs/claude-code/001-add-settings-screen/human-review.md`
 
-Automated checks generated. Human review is still required for taste, visual consistency, restraint, copy quality, and final ship readiness.
+Human review found this is not a valid comparable Settings-screen product run. The artifacts primarily capture benchmark harness/bootstrap changes, the diff.patch is empty, and changed files are mostly repo/task/tooling docs rather than the requested Mira Settings implementation. Exclude from product-quality scoring.
 
 Human scores pending.
 

@@ -1,0 +1,51 @@
+{
+  "taskId": "003-dark-mode-fidelity",
+  "taskName": "Dark Mode Fidelity",
+  "allowedChangedPaths": [
+    "Mira/Mira/DesignSystem/",
+    "Mira/Mira/Components/",
+    "Mira/Mira/Screens/Today/",
+    "Mira/Mira/Screens/Journal/",
+    "Mira/Mira/Screens/EntryDetail/",
+    "Mira/Mira/Screens/NewEntry/",
+    "Mira/Mira/Screens/Settings/",
+    "Mira/MiraTests/",
+    "Mira/Mira.xcodeproj/"
+  ],
+  "expectedNewFiles": [],
+  "designTokenKeywords": [
+    "MiraColors",
+    "MiraSpacing",
+    "MiraTypography",
+    "MiraRadius",
+    "MiraShadow",
+    "miraSurface",
+    "Color(UIColor",
+    "userInterfaceStyle",
+    "trait.userInterfaceStyle"
+  ],
+  "disallowedRawColorPatterns": [
+    "Color\\.red",
+    "Color\\.blue",
+    "Color\\.green",
+    "Color\\.orange",
+    "Color\\.purple",
+    "Color\\.pink",
+    "Color\\.yellow",
+    "Color\\.black",
+    "Color\\.white",
+    "Color\\(red:",
+    "UIColor\\.black",
+    "UIColor\\.white",
+    "UIColor\\.system",
+    "UIColor\\.label",
+    "UIColor\\.secondaryLabel"
+  ],
+  "accessibilityKeywords": [
+    ".accessibilityLabel",
+    ".accessibilityHint",
+    ".accessibilityElement",
+    ".accessibilityAddTraits",
+    ".accessibilityValue"
+  ]
+}

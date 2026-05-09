@@ -41,6 +41,19 @@
   },
   "totalScore": null,
   "maxScore": 24,
-  "shipReadiness": null,
-  "summary": "Automated checks generated. Human review is still required for taste, visual consistency, restraint, copy quality, and final ship readiness."
+  "shipReadiness": "invalid-run",
+  "summary": "Human review found this is not a valid comparable Settings-screen product run. The artifacts primarily capture benchmark harness/bootstrap changes, the diff.patch is empty, and changed files are mostly repo/task/tooling docs rather than the requested Mira Settings implementation. Exclude from product-quality scoring.",
+  "humanReviewNotes": [
+    "Not scoreable as a product implementation for Task 001.",
+    "Automated checks show build/tests passed, but changed-files.txt lists benchmark/tooling/task-doc files rather than a Settings screen implementation.",
+    "diff.patch is empty, so the UI/product change cannot be inspected from this run artifact.",
+    "This run is useful as harness history, not as an agent product-quality comparison point."
+  ],
+  "extendedScores": {
+    "reviewability": {
+      "score": 1,
+      "maxScore": 4,
+      "notes": "The run has logs and result.json, but the empty diff and unrelated changed files make it poor evidence for product review. It should be excluded from task-level agent ranking."
+    }
+  }
 }
