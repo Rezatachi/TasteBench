@@ -4,13 +4,13 @@ TasteBench evaluates whether AI coding agents can make product-quality app chang
 
 ## Current Dashboard Summary
 
-- Runs captured: 4
-- Scored runs: 3
-- Average human score: 19.83
-- Build+test pass count: 4
+- Runs captured: 6
+- Scored runs: 5
+- Average human score: 20.6
+- Build+test pass count: 6
 - Automated pass but human-blocked count: 1
 - Agents: claude-code, codex, hermes
-- Tasks: 001-add-settings-screen, 002-journal-empty-state
+- Tasks: 001-add-settings-screen, 002-journal-empty-state, 003-dark-mode-fidelity
 
 ## Run Matrix
 
@@ -19,7 +19,9 @@ TasteBench evaluates whether AI coding agents can make product-quality app chang
 | 001-add-settings-screen | claude-code | True | True | 13 | 933 / 0 | pending | invalid-run |
 | 001-add-settings-screen | codex | True | True | 3 | 197 / 2 | 15.0/24 | no |
 | 002-journal-empty-state | codex | True | True | 1 | 46 / 7 | 21.7/24 | yes-with-polish |
+| 003-dark-mode-fidelity | codex | True | True | 4 | 64 / 22 | 23.0/24 | yes |
 | 002-journal-empty-state | hermes | True | True | 1 | 35 / 5 | 22.8/24 | yes |
+| 003-dark-mode-fidelity | hermes | True | True | 5 | 45 / 17 | 20.5/24 | yes-with-minor-cleanup |
 
 ## Early Findings
 
@@ -74,6 +76,24 @@ Automated checks passed and the implementation is broadly product-aligned. Human
 | Accessibility | 2.5/3 |
 | Regression risk | 3/3 |
 
+### 003-dark-mode-fidelity — codex
+
+Result: `runs/codex/003-dark-mode-fidelity/result.json`
+Human review: `runs/codex/003-dark-mode-fidelity/human-review.md`
+
+Human review: strong, shippable dark-mode token refinement. Codex keeps the work narrow, preserves light mode, removes raw component colors, and produces a warm readable palette; only minor caveats around disabled button contrast and lack of screenshot-based review.
+
+| Dimension | Score |
+| --- | ---: |
+| Functional | 3/3 |
+| Build/test | 3/3 |
+| Visual | 3/3 |
+| Design system | 3/3 |
+| Interaction | 2.5/3 |
+| Restraint | 3/3 |
+| Accessibility | 2.5/3 |
+| Regression risk | 3/3 |
+
 ### 002-journal-empty-state — hermes
 
 Result: `runs/hermes/002-journal-empty-state/result.json`
@@ -91,3 +111,21 @@ Automated checks passed and human review finds the result ship-ready. The implem
 | Restraint | 2.8/3 |
 | Accessibility | 2.6/3 |
 | Regression risk | 3/3 |
+
+### 003-dark-mode-fidelity — hermes
+
+Result: `runs/hermes/003-dark-mode-fidelity/result.json`
+Human review: `runs/hermes/003-dark-mode-fidelity/human-review.md`
+
+Human review: shippable directionally, with a better shared surface-border adjustment than Codex, but less clean design-system adherence because mood colors remain raw UIColor values outside MiraColors and the raw-color heuristic flags 28 usages.
+
+| Dimension | Score |
+| --- | ---: |
+| Functional | 3/3 |
+| Build/test | 2.5/3 |
+| Visual | 3/3 |
+| Design system | 2/3 |
+| Interaction | 2.5/3 |
+| Restraint | 2.5/3 |
+| Accessibility | 2.5/3 |
+| Regression risk | 2.5/3 |

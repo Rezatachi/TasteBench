@@ -1,0 +1,148 @@
+diff --git a/Mira/Mira/Components/PrimaryButton.swift b/Mira/Mira/Components/PrimaryButton.swift
+index a0d9348..86cead4 100644
+--- a/Mira/Mira/Components/PrimaryButton.swift
++++ b/Mira/Mira/Components/PrimaryButton.swift
+@@ -15,7 +15,7 @@ struct PrimaryButton: View {
+                 Text(title)
+             }
+             .font(MiraTypography.caption)
+-            .foregroundStyle(Color.white)
++            .foregroundStyle(isDisabled ? MiraColors.textSecondary : MiraColors.accentForeground)
+             .frame(maxWidth: .infinity)
+             .padding(.vertical, 15)
+             .background(isDisabled ? MiraColors.textSecondary.opacity(0.45) : MiraColors.accent, in: RoundedRectangle(cornerRadius: MiraRadius.md, style: .continuous))
+diff --git a/Mira/Mira/DesignSystem/MiraColors.swift b/Mira/Mira/DesignSystem/MiraColors.swift
+index 88ff01b..b39f911 100644
+--- a/Mira/Mira/DesignSystem/MiraColors.swift
++++ b/Mira/Mira/DesignSystem/MiraColors.swift
+@@ -3,37 +3,86 @@ import SwiftUI
+ enum MiraColors {
+     static let background = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.10, green: 0.09, blue: 0.08, alpha: 1.0)
+-        : UIColor(red: 0.97, green: 0.94, blue: 0.88, alpha: 1.0)
++        ? uiColor(0.11, 0.095, 0.08)
++        : uiColor(0.97, 0.94, 0.88)
+     })
+ 
+     static let surface = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.16, green: 0.14, blue: 0.13, alpha: 1.0)
+-        : UIColor(red: 1.00, green: 0.98, blue: 0.93, alpha: 1.0)
++        ? uiColor(0.17, 0.145, 0.125)
++        : uiColor(1.00, 0.98, 0.93)
+     })
+ 
+     static let textPrimary = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.93, green: 0.89, blue: 0.82, alpha: 1.0)
+-        : UIColor(red: 0.18, green: 0.15, blue: 0.12, alpha: 1.0)
++        ? uiColor(0.88, 0.84, 0.77)
++        : uiColor(0.18, 0.15, 0.12)
+     })
+ 
+     static let textSecondary = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.68, green: 0.62, blue: 0.55, alpha: 1.0)
+-        : UIColor(red: 0.46, green: 0.39, blue: 0.32, alpha: 1.0)
++        ? uiColor(0.70, 0.64, 0.56)
++        : uiColor(0.46, 0.39, 0.32)
+     })
+ 
+     static let accent = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.83, green: 0.61, blue: 0.43, alpha: 1.0)
+-        : UIColor(red: 0.63, green: 0.32, blue: 0.18, alpha: 1.0)
++        ? uiColor(0.78, 0.56, 0.38)
++        : uiColor(0.63, 0.32, 0.18)
++    })
++
++    static let accentForeground = Color(UIColor { trait in
++        trait.userInterfaceStyle == .dark
++        ? uiColor(0.15, 0.10, 0.07)
++        : uiColor(1.00, 0.97, 0.90)
+     })
+ 
+     static let border = Color(UIColor { trait in
+         trait.userInterfaceStyle == .dark
+-        ? UIColor(red: 0.30, green: 0.26, blue: 0.22, alpha: 1.0)
+-        : UIColor(red: 0.86, green: 0.78, blue: 0.66, alpha: 1.0)
++        ? uiColor(0.36, 0.30, 0.25)
++        : uiColor(0.86, 0.78, 0.66)
+     })
++
++    static let shadow = Color(UIColor { trait in
++        trait.userInterfaceStyle == .dark
++        ? uiColor(0.04, 0.03, 0.025, 0.32)
++        : uiColor(0.18, 0.15, 0.12, 0.07)
++    })
++
++    static func moodTint(for mood: Mood) -> Color {
++        Color(UIColor { trait in
++            let isDark = trait.userInterfaceStyle == .dark
++
++            switch mood {
++            case .calm:
++                return isDark
++                ? uiColor(0.55, 0.67, 0.61)
++                : uiColor(0.43, 0.57, 0.52)
++            case .grateful:
++                return isDark
++                ? uiColor(0.77, 0.58, 0.39)
++                : uiColor(0.71, 0.49, 0.28)
++            case .anxious:
++                return isDark
++                ? uiColor(0.70, 0.61, 0.77)
++                : uiColor(0.61, 0.50, 0.73)
++            case .focused:
++                return isDark
++                ? uiColor(0.53, 0.62, 0.76)
++                : uiColor(0.38, 0.49, 0.66)
++            case .tired:
++                return isDark
++                ? uiColor(0.66, 0.62, 0.55)
++                : uiColor(0.55, 0.52, 0.47)
++            case .hopeful:
++                return isDark
++                ? uiColor(0.66, 0.70, 0.43)
++                : uiColor(0.55, 0.60, 0.34)
++            }
++        })
++    }
++
++    private static func uiColor(_ red: Float, _ green: Float, _ blue: Float, _ alpha: Float = 1.0) -> UIColor {
++        UIColor(_colorLiteralRed: red, green: green, blue: blue, alpha: alpha)
++    }
+ }
+diff --git a/Mira/Mira/DesignSystem/MiraShadow.swift b/Mira/Mira/DesignSystem/MiraShadow.swift
+index 0ce687a..5a2d528 100644
+--- a/Mira/Mira/DesignSystem/MiraShadow.swift
++++ b/Mira/Mira/DesignSystem/MiraShadow.swift
+@@ -2,7 +2,7 @@ import SwiftUI
+ 
+ struct MiraSoftShadow: ViewModifier {
+     func body(content: Content) -> some View {
+-        content.shadow(color: Color.black.opacity(0.07), radius: 18, x: 0, y: 10)
++        content.shadow(color: MiraColors.shadow, radius: 18, x: 0, y: 10)
+     }
+ }
+ 
+diff --git a/Mira/Mira/DesignSystem/MoodStyle.swift b/Mira/Mira/DesignSystem/MoodStyle.swift
+index a8e3054..6d1b7ff 100644
+--- a/Mira/Mira/DesignSystem/MoodStyle.swift
++++ b/Mira/Mira/DesignSystem/MoodStyle.swift
+@@ -2,13 +2,6 @@ import SwiftUI
+ 
+ extension Mood {
+     var tintColor: Color {
+-        switch self {
+-        case .calm: Color(red: 0.43, green: 0.57, blue: 0.52)
+-        case .grateful: Color(red: 0.71, green: 0.49, blue: 0.28)
+-        case .anxious: Color(red: 0.61, green: 0.50, blue: 0.73)
+-        case .focused: Color(red: 0.38, green: 0.49, blue: 0.66)
+-        case .tired: Color(red: 0.55, green: 0.52, blue: 0.47)
+-        case .hopeful: Color(red: 0.55, green: 0.60, blue: 0.34)
+-        }
++        MiraColors.moodTint(for: self)
+     }
+ }
