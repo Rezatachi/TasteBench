@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TasteBench Dashboard — Agent Product Taste Evaluation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            serif: ['Iowan Old Style', 'New York', 'Georgia', 'serif'],
+            mono: ['SFMono-Regular', 'ui-monospace', 'Menlo', 'monospace']
+          },
+          colors: {
+            cream: '#F5EFE4',
+            parchment: '#FBF7EF',
+            ink: '#2E251E',
+            muted: '#75675B',
+            line: '#DED0BE',
+            ember: '#A0522D',
+            clay: '#C7835A',
+            moss: '#7F8A55',
+            plum: '#8B789E',
+            night: '#211A16'
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(70, 47, 28, 0.10)',
+            card: '0 10px 28px rgba(70, 47, 28, 0.075)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root { color-scheme: light; }
+    html { scroll-behavior: smooth; }
+    body {
+      background:
+        radial-gradient(circle at 12% -8%, rgba(199, 131, 90, 0.22), transparent 34rem),
+        radial-gradient(circle at 93% 3%, rgba(127, 138, 85, 0.16), transparent 32rem),
+        #F5EFE4;
+    }
+    .grain::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .28;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+    }
+    .chart-card canvas { max-height: 360px; }
+    .score-pill { font-variant-numeric: tabular-nums; }
+    .screenshot-slot {
+      background:
+        linear-gradient(145deg, rgba(46,37,30,.08), rgba(255,255,255,.35)),
+        repeating-linear-gradient(135deg, rgba(160,82,45,.09) 0 1px, transparent 1px 12px);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+      section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="grain text-ink antialiased">
+  <div class="mx-auto max-w-7xl px-5 py-8 sm:px-8 lg:px-10">
+    <header class="mb-10 overflow-hidden rounded-[2rem] border border-line/80 bg-parchment/85 p-8 shadow-soft backdrop-blur md:p-12">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-3xl">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-cream px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-muted">
+            <span class="h-2 w-2 rounded-full bg-ember"></span>
+            TasteBench / Product-quality evals
+          </div>
+          <h1 class="font-serif text-5xl leading-[0.95] tracking-[-0.04em] text-ink md:text-7xl">
+            Agents as product builders, not just code generators.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-muted">
+            A visual dashboard for Mira benchmark tasks: build/test signals, human product review, design-system hygiene, and screenshot-ready task stories.
+          </p>
+        </div>
+        <div class="grid min-w-[280px] grid-cols-2 gap-3" id="summaryStats"></div>
+      </div>
+    </header>
+
+    <main class="space-y-8">
+      <section class="grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
+        <article class="chart-card rounded-[1.75rem] border border-line bg-parchment/90 p-6 shadow-card">
+          <div class="mb-5 flex items-start justify-between gap-4">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Human score by task</p>
+              <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Who preserved product taste?</h2>
+            </div>
+            <span class="rounded-full bg-cream px-3 py-1 text-xs font-medium text-muted">/24 rubric</span>
+          </div>
+          <canvas id="scoreChart" aria-label="Grouped bar chart of human scores by task and agent"></canvas>
+        </article>
+
+        <article class="rounded-[1.75rem] border border-line bg-night p-6 text-cream shadow-card">
+          <p class="text-xs font-bold uppercase tracking-[0.20em] text-clay">Thesis</p>
+          <h2 class="mt-3 font-serif text-3xl tracking-[-0.03em]">Automation is necessary. Taste is separate.</h2>
+          <div class="mt-6 space-y-4 text-sm leading-6 text-cream/75">
+            <p>Every captured run passed build and tests. But one Task 001 run was invalid, another was blocked by human review, and later tasks were separated by copy nuance and token hygiene.</p>
+            <p>This is the core TasteBench signal: product judgment lives in restraint, hierarchy, copy, native feel, and maintainable design-system choices.</p>
+          </div>
+          <div id="automationCallouts" class="mt-7 grid gap-3"></div>
+        </article>
+      </section>
+
+      <section class="grid gap-6 lg:grid-cols-2">
+        <article class="chart-card rounded-[1.75rem] border border-line bg-parchment/90 p-6 shadow-card">
+          <div class="mb-5">
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Rubric small multiple</p>
+            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Where each run won or slipped</h2>
+          </div>
+          <canvas id="rubricChart" aria-label="Radar chart of rubric scores"></canvas>
+        </article>
+        <article class="chart-card rounded-[1.75rem] border border-line bg-parchment/90 p-6 shadow-card">
+          <div class="mb-5">
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Diff footprint</p>
+            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Implementation size vs. review outcome</h2>
+          </div>
+          <canvas id="diffChart" aria-label="Bubble chart of changed files and human scores"></canvas>
+        </article>
+      </section>
+
+      <section class="rounded-[1.75rem] border border-line bg-parchment/90 p-6 shadow-card">
+        <div class="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Run matrix</p>
+            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">All model runs at a glance</h2>
+          </div>
+          <p class="max-w-xl text-sm leading-6 text-muted">Green build/test badges can coexist with red product decisions. The point is to make that boundary explicit.</p>
+        </div>
+        <div class="overflow-hidden rounded-3xl border border-line bg-cream/70">
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-line text-left text-sm">
+              <thead class="bg-ink text-cream">
+                <tr>
+                  <th class="px-5 py-4 font-semibold">Task</th>
+                  <th class="px-5 py-4 font-semibold">Agent</th>
+                  <th class="px-5 py-4 font-semibold">Auto</th>
+                  <th class="px-5 py-4 font-semibold">Human score</th>
+                  <th class="px-5 py-4 font-semibold">Ship</th>
+                  <th class="px-5 py-4 font-semibold">Diff</th>
+                  <th class="px-5 py-4 font-semibold">Signal</th>
+                </tr>
+              </thead>
+              <tbody id="runTable" class="divide-y divide-line"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Task stories</p>
+            <h2 class="mt-2 font-serif text-4xl tracking-[-0.04em]">What each benchmark actually tested</h2>
+          </div>
+        </div>
+        <div id="taskCards" class="grid gap-6"></div>
+      </section>
+
+      <section class="rounded-[1.75rem] border border-dashed border-line bg-parchment/70 p-6 shadow-card">
+        <div class="grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Screenshot plan</p>
+            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Slots are ready; real simulator captures come next.</h2>
+            <p class="mt-4 text-sm leading-6 text-muted">The dashboard already renders screenshot placeholders by run. Next pass: capture Mira screens from the simulator and drop images into each run’s screenshots directory.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Today</span></div>
+            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Journal</span></div>
+            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Entry</span></div>
+            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Settings</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const DATA = {"summary": {"generatedAt": "2026-05-10T04:02:56.814872+00:00", "runCount": 6, "scoredRunCount": 5, "averageHumanScore": 20.6, "automatedBuildAndTestPassCount": 6, "automatedPassButHumanBlockedCount": 1, "agents": ["claude-code", "codex", "hermes"], "tasks": ["001-add-settings-screen", "002-journal-empty-state", "003-dark-mode-fidelity"]}, "runs": [{"taskId": "001-add-settings-screen", "taskName": "Add Settings Screen", "agent": "claude-code", "status": "completed", "timestamp": "2026-05-02T21:44:02.277765Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 13, "linesAdded": 933, "linesRemoved": 0, "rawColorUsages": 0, "designTokenReferences": 0, "accessibilityReferences": 0, "unrelatedFilesChanged": [".gitignore", "Mira/docs/product-principles.md", "Mira/tasks/001-add-settings-screen/agent-prompt.md", "Mira/tasks/001-add-settings-screen/expected-behavior.md", "Mira/tasks/001-add-settings-screen/scoring.md", "Mira/tasks/001-add-settings-screen/task.md", "README.md", "scripts/analyze-diff.py", "scripts/evaluate-run.sh", "tasks/001-add-settings-screen/config.json", "tasks/001-add-settings-screen/scoring.md", "tasks/001-add-settings-screen/task.md", "tests/test_analyze_diff.py"]}, "scores": {"functionalCorrectness": null, "buildAndTestHealth": null, "visualConsistency": null, "designSystemAdherence": null, "interactionQuality": null, "restraint": null, "accessibility": null, "regressionRisk": null}, "totalScore": null, "maxScore": 24, "shipReadiness": "invalid-run", "summary": "Human review found this is not a valid comparable Settings-screen product run. The artifacts primarily capture benchmark harness/bootstrap changes, the diff.patch is empty, and changed files are mostly repo/task/tooling docs rather than the requested Mira Settings implementation. Exclude from product-quality scoring.", "humanReviewNotes": ["Not scoreable as a product implementation for Task 001.", "Automated checks show build/tests passed, but changed-files.txt lists benchmark/tooling/task-doc files rather than a Settings screen implementation.", "diff.patch is empty, so the UI/product change cannot be inspected from this run artifact.", "This run is useful as harness history, not as an agent product-quality comparison point."], "extendedScores": {"reviewability": {"score": 1, "maxScore": 4, "notes": "The run has logs and result.json, but the empty diff and unrelated changed files make it poor evidence for product review. It should be excluded from task-level agent ranking."}}, "resultPath": "runs/claude-code/001-add-settings-screen/result.json", "humanReviewPath": "runs/claude-code/001-add-settings-screen/human-review.md", "taskQuestion": "Can an agent add a Settings surface that feels native, restrained, and integrated with Mira rather than merely compiling?"}, {"taskId": "001-add-settings-screen", "taskName": "Add Settings Screen", "agent": "codex", "status": "completed", "timestamp": "2026-05-02T22:58:12.179876Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 3, "linesAdded": 197, "linesRemoved": 2, "rawColorUsages": 0, "designTokenReferences": 69, "accessibilityReferences": 2, "unrelatedFilesChanged": []}, "scores": {"functionalCorrectness": 3, "buildAndTestHealth": 3, "visualConsistency": 1, "designSystemAdherence": 1.5, "interactionQuality": 1, "restraint": 2, "accessibility": 1.5, "regressionRisk": 2}, "totalScore": 15.0, "maxScore": 24, "shipReadiness": "no", "summary": "Automated checks passed, but human review found severe product-quality issues: padding/layout problems, slow animations, and misaligned text. Not ship-ready without visual and interaction polish.", "humanReviewNotes": ["Severe padding issues throughout the Codex settings implementation.", "Animations feel slow and degrade interaction quality.", "Text alignment is visibly off/misaligned.", "Automated build/test checks passed, but product-quality review blocks ship readiness."], "extendedScores": {"reviewability": {"score": 3, "maxScore": 4, "notes": "Diff artifacts, result.json, and human-review.md make the run inspectable, but the agent did not provide enough rationale, source trail, rollback framing, or uncertainty to earn full credit."}}, "evaluationPrinciples": ["Evaluate persistence, not just task completion: preserve product intent across refactors, UI changes, interruptions, and follow-up work.", "Score reviewability: diffs, rationale, source trails, rollback points, and uncertainty should make the work easy to inspect.", "Add surface-neutrality tests across IDE, CLI, chat, browser, and design-tool workflows."], "resultPath": "runs/codex/001-add-settings-screen/result.json", "humanReviewPath": "runs/codex/001-add-settings-screen/human-review.md", "taskQuestion": "Can an agent add a Settings surface that feels native, restrained, and integrated with Mira rather than merely compiling?"}, {"taskId": "002-journal-empty-state", "taskName": "Journal Empty State", "agent": "codex", "status": "completed", "timestamp": "2026-05-09T19:31:12.696185Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 1, "linesAdded": 46, "linesRemoved": 7, "rawColorUsages": 0, "designTokenReferences": 20, "accessibilityReferences": 3, "unrelatedFilesChanged": []}, "scores": {"functionalCorrectness": 3, "buildAndTestHealth": 3, "visualConsistency": 2.3, "designSystemAdherence": 2.5, "interactionQuality": 3, "restraint": 2.4, "accessibility": 2.5, "regressionRisk": 3}, "totalScore": 21.7, "maxScore": 24, "shipReadiness": "yes-with-polish", "summary": "Automated checks passed and the implementation is broadly product-aligned. Human review finds it shippable with polish: the empty state is calm and functional, but the all-caps eyebrow, extra hierarchy, and slightly terse CTA make it feel a bit more designed/constructed than Mira's quietest moments.", "humanReviewNotes": ["Correctly gates the empty state on zero entries and preserves the populated list path.", "Uses existing Mira tokens, surface styling, and PrimaryButton with no raw colors.", "Copy is warm and non-generic, especially the body guidance around one moment/feeling.", "The uppercased eyebrow plus title/body creates a more formal empty-state component; acceptable, but a little less restrained than ideal.", "CTA 'Write first reflection' is clear but slightly clipped compared with the more human 'Write your first reflection'.", "Automated checks pass, but they cannot distinguish these copy/hierarchy nuances."], "extendedScores": {"reviewability": {"score": 3.2, "maxScore": 4, "notes": "Diff is small, isolated, and easy to inspect. Extracting entryList improves readability, though the agent did not leave much rationale beyond the code and generated artifacts."}}, "evaluationPrinciples": ["Automated build/test/diff checks are necessary but insufficient for product taste.", "Human review should inspect copy, hierarchy, restraint, and whether the work feels native to Mira.", "Small diffs can still vary meaningfully in product quality."], "resultPath": "runs/codex/002-journal-empty-state/result.json", "humanReviewPath": "runs/codex/002-journal-empty-state/human-review.md", "taskQuestion": "Can an agent design a non-happy-path empty Journal state with human copy, calm hierarchy, and product sensitivity?"}, {"taskId": "003-dark-mode-fidelity", "taskName": "Dark Mode Fidelity", "agent": "codex", "status": "completed", "timestamp": "2026-05-10T02:41:48.195207Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 4, "linesAdded": 64, "linesRemoved": 22, "rawColorUsages": 0, "designTokenReferences": 37, "accessibilityReferences": 0, "unrelatedFilesChanged": []}, "scores": {"functionalCorrectness": 3, "buildAndTestHealth": 3, "visualConsistency": 3, "designSystemAdherence": 3, "interactionQuality": 2.5, "restraint": 3, "accessibility": 2.5, "regressionRisk": 3}, "totalScore": 23.0, "maxScore": 24, "shipReadiness": "yes", "summary": "Human review: strong, shippable dark-mode token refinement. Codex keeps the work narrow, preserves light mode, removes raw component colors, and produces a warm readable palette; only minor caveats around disabled button contrast and lack of screenshot-based review.", "resultPath": "runs/codex/003-dark-mode-fidelity/result.json", "humanReviewPath": "runs/codex/003-dark-mode-fidelity/human-review.md", "taskQuestion": "Can an agent improve dark mode while preserving Mira’s warmth, restraint, and design-system coherence?"}, {"taskId": "002-journal-empty-state", "taskName": "Journal Empty State", "agent": "hermes", "status": "completed", "timestamp": "2026-05-09T19:31:39.554211Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 1, "linesAdded": 35, "linesRemoved": 5, "rawColorUsages": 0, "designTokenReferences": 17, "accessibilityReferences": 3, "unrelatedFilesChanged": []}, "scores": {"functionalCorrectness": 3, "buildAndTestHealth": 3, "visualConsistency": 2.7, "designSystemAdherence": 2.7, "interactionQuality": 3, "restraint": 2.8, "accessibility": 2.6, "regressionRisk": 3}, "totalScore": 22.8, "maxScore": 24, "shipReadiness": "yes", "summary": "Automated checks passed and human review finds the result ship-ready. The implementation is narrow, calm, and product-sensitive; the copy feels more human and less generic than a typical empty state, with only minor polish questions around the surfaced card treatment/shadow.", "humanReviewNotes": ["Correctly gates the empty state on zero entries and preserves the existing populated Journal behavior.", "Primary action opens the existing New Entry sheet and uses PrimaryButton.", "Copy is calm, specific, and human: 'a few honest lines' fits Mira's reflection-first product voice.", "The implementation is smaller than Codex's and avoids a separate all-caps eyebrow, making the hierarchy feel more restrained.", "Use of surface shadow is acceptable but worth checking visually against Mira's quiet editorial tone.", "Automated checks pass, but the strongest signal here is the qualitative fit of the copy and restraint."], "extendedScores": {"reviewability": {"score": 3.4, "maxScore": 4, "notes": "Diff is very small and limited to one file. The subagent returned a clear summary and caveats, but rollback framing and explicit uncertainty could still be stronger."}}, "evaluationPrinciples": ["Automated build/test/diff checks are necessary but insufficient for product taste.", "Human review should inspect copy, hierarchy, restraint, and whether the work feels native to Mira.", "Small diffs can still vary meaningfully in product quality."], "resultPath": "runs/hermes/002-journal-empty-state/result.json", "humanReviewPath": "runs/hermes/002-journal-empty-state/human-review.md", "taskQuestion": "Can an agent design a non-happy-path empty Journal state with human copy, calm hierarchy, and product sensitivity?"}, {"taskId": "003-dark-mode-fidelity", "taskName": "Dark Mode Fidelity", "agent": "hermes", "status": "completed", "timestamp": "2026-05-10T02:49:19.115200Z", "automatedChecks": {"buildPassed": true, "testsPassed": true, "filesChanged": 5, "linesAdded": 45, "linesRemoved": 17, "rawColorUsages": 28, "designTokenReferences": 39, "accessibilityReferences": 0, "unrelatedFilesChanged": []}, "scores": {"functionalCorrectness": 3, "buildAndTestHealth": 2.5, "visualConsistency": 3, "designSystemAdherence": 2, "interactionQuality": 2.5, "restraint": 2.5, "accessibility": 2.5, "regressionRisk": 2.5}, "totalScore": 20.5, "maxScore": 24, "shipReadiness": "yes-with-minor-cleanup", "summary": "Human review: shippable directionally, with a better shared surface-border adjustment than Codex, but less clean design-system adherence because mood colors remain raw UIColor values outside MiraColors and the raw-color heuristic flags 28 usages.", "resultPath": "runs/hermes/003-dark-mode-fidelity/result.json", "humanReviewPath": "runs/hermes/003-dark-mode-fidelity/human-review.md", "taskQuestion": "Can an agent improve dark mode while preserving Mira’s warmth, restraint, and design-system coherence?"}]};
+    const agentColors = {
+      'codex': '#A0522D',
+      'hermes': '#7F8A55',
+      'claude-code': '#8B789E'
+    };
+    const agentSoft = {
+      'codex': 'rgba(160, 82, 45, 0.18)',
+      'hermes': 'rgba(127, 138, 85, 0.18)',
+      'claude-code': 'rgba(139, 120, 158, 0.18)'
+    };
+    const rubricLabels = {
+      functionalCorrectness: 'Functional',
+      buildAndTestHealth: 'Build/test',
+      visualConsistency: 'Visual',
+      designSystemAdherence: 'Design system',
+      interactionQuality: 'Interaction',
+      restraint: 'Restraint',
+      accessibility: 'Accessibility',
+      regressionRisk: 'Regression risk'
+    };
+    const taskShort = (id) => id.replace(/^\d+-/, '').replaceAll('-', ' ');
+    const scoreText = (run) => run.totalScore == null ? 'pending' : `${run.totalScore}/${run.maxScore || 24}`;
+    const shipClass = (ship) => {
+      const s = String(ship || '').toLowerCase();
+      if (s === 'yes') return 'bg-moss/15 text-moss border-moss/25';
+      if (s.includes('yes-with')) return 'bg-clay/15 text-ember border-clay/25';
+      if (s === 'no' || s.includes('invalid')) return 'bg-red-950/10 text-red-900 border-red-900/20';
+      return 'bg-cream text-muted border-line';
+    };
+    const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+    function renderSummary() {
+      const s = DATA.summary;
+      const stats = [
+        ['Runs', s.runCount],
+        ['Scored', s.scoredRunCount],
+        ['Avg score', s.averageHumanScore],
+        ['Auto pass', s.automatedBuildAndTestPassCount]
+      ];
+      document.getElementById('summaryStats').innerHTML = stats.map(([label, value]) => `
+        <div class="rounded-3xl border border-line bg-cream/80 p-4">
+          <div class="font-serif text-3xl tracking-[-0.04em]">${value}</div>
+          <div class="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-muted">${label}</div>
+        </div>`).join('');
+      document.getElementById('automationCallouts').innerHTML = `
+        <div class="rounded-2xl border border-cream/15 bg-cream/8 p-4">
+          <div class="text-2xl font-semibold">${s.automatedBuildAndTestPassCount}/${s.runCount}</div>
+          <div class="text-xs uppercase tracking-[0.18em] text-cream/55">Build + tests passed</div>
+        </div>
+        <div class="rounded-2xl border border-clay/25 bg-clay/10 p-4">
+          <div class="text-2xl font-semibold">${s.automatedPassButHumanBlockedCount}</div>
+          <div class="text-xs uppercase tracking-[0.18em] text-cream/55">Auto-pass but human-blocked</div>
+        </div>`;
+    }
+
+    function renderTable() {
+      document.getElementById('runTable').innerHTML = DATA.runs.map(run => {
+        const c = run.automatedChecks || {};
+        const auto = c.buildPassed && c.testsPassed ? 'passed' : 'failed';
+        return `<tr class="bg-parchment/60 align-top hover:bg-cream/80">
+          <td class="px-5 py-4"><div class="font-medium">${escapeHtml(run.taskName)}</div><div class="mt-1 font-mono text-xs text-muted">${escapeHtml(run.taskId)}</div></td>
+          <td class="px-5 py-4"><span class="rounded-full border border-line bg-cream px-2.5 py-1 font-mono text-xs">${escapeHtml(run.agent)}</span></td>
+          <td class="px-5 py-4"><span class="rounded-full border border-moss/25 bg-moss/10 px-2.5 py-1 text-xs font-semibold text-moss">${auto}</span></td>
+          <td class="score-pill px-5 py-4 font-semibold">${scoreText(run)}</td>
+          <td class="px-5 py-4"><span class="rounded-full border px-2.5 py-1 text-xs font-semibold ${shipClass(run.shipReadiness)}">${escapeHtml(run.shipReadiness || 'pending')}</span></td>
+          <td class="score-pill px-5 py-4 text-muted">${c.filesChanged} files · +${c.linesAdded} / -${c.linesRemoved}</td>
+          <td class="max-w-md px-5 py-4 text-sm leading-6 text-muted">${escapeHtml(run.summary)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function renderTaskCards() {
+      const byTask = new Map();
+      for (const run of DATA.runs) {
+        if (!byTask.has(run.taskId)) byTask.set(run.taskId, []);
+        byTask.get(run.taskId).push(run);
+      }
+      const cards = [...byTask.entries()].map(([taskId, runs]) => {
+        const taskName = runs[0].taskName;
+        const scored = runs.filter(r => typeof r.totalScore === 'number');
+        const winner = scored.length ? scored.reduce((a,b) => a.totalScore > b.totalScore ? a : b) : null;
+        return `<article class="rounded-[1.75rem] border border-line bg-parchment/90 p-6 shadow-card">
+          <div class="grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
+            <div>
+              <div class="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-muted">${escapeHtml(taskId)}</div>
+              <h3 class="font-serif text-3xl tracking-[-0.03em]">${escapeHtml(taskName)}</h3>
+              <p class="mt-4 text-sm leading-6 text-muted">${escapeHtml(runs[0].taskQuestion || '')}</p>
+              <div class="mt-5 rounded-2xl border border-line bg-cream/80 p-4">
+                <div class="text-xs font-bold uppercase tracking-[0.18em] text-ember">Winner</div>
+                <div class="mt-1 text-lg font-semibold">${winner ? escapeHtml(winner.agent) + ' · ' + scoreText(winner) : 'not scored'}</div>
+              </div>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2">
+              ${runs.map(run => `
+                <div class="rounded-3xl border border-line bg-cream/75 p-4">
+                  <div class="flex items-start justify-between gap-3">
+                    <div>
+                      <div class="font-mono text-xs uppercase tracking-[0.16em] text-muted">${escapeHtml(run.agent)}</div>
+                      <div class="mt-1 text-2xl font-semibold score-pill">${scoreText(run)}</div>
+                    </div>
+                    <span class="rounded-full border px-2 py-1 text-[11px] font-semibold ${shipClass(run.shipReadiness)}">${escapeHtml(run.shipReadiness || 'pending')}</span>
+                  </div>
+                  <div class="mt-4 grid grid-cols-2 gap-2">
+                    <div class="screenshot-slot aspect-[9/16] rounded-2xl border border-line p-3"><span class="text-[11px] font-semibold text-muted">Before</span></div>
+                    <div class="screenshot-slot aspect-[9/16] rounded-2xl border border-line p-3"><span class="text-[11px] font-semibold text-muted">After</span></div>
+                  </div>
+                  <p class="mt-4 line-clamp-4 text-sm leading-6 text-muted">${escapeHtml(run.summary)}</p>
+                </div>`).join('')}
+            </div>
+          </div>
+        </article>`;
+      }).join('');
+      document.getElementById('taskCards').innerHTML = cards;
+    }
+
+    function initCharts() {
+      Chart.defaults.font.family = 'Inter, ui-sans-serif, system-ui';
+      Chart.defaults.color = '#75675B';
+      const tasks = [...new Set(DATA.runs.map(r => r.taskId))];
+      const agents = DATA.summary.agents;
+      new Chart(document.getElementById('scoreChart'), {
+        type: 'bar',
+        data: {
+          labels: tasks.map(taskShort),
+          datasets: agents.map(agent => ({
+            label: agent,
+            data: tasks.map(task => {
+              const run = DATA.runs.find(r => r.taskId === task && r.agent === agent);
+              return run && typeof run.totalScore === 'number' ? run.totalScore : null;
+            }),
+            backgroundColor: agentColors[agent] || '#75675B',
+            borderRadius: 10,
+            borderSkipped: false
+          }))
+        },
+        options: {
+          responsive: true,
+          scales: { y: { beginAtZero: true, max: 24, grid: { color: 'rgba(117,103,91,.16)' } }, x: { grid: { display: false } } },
+          plugins: { legend: { position: 'bottom' }, tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw ?? 'not scored'}/24` } } }
+        }
+      });
+
+      const scored = DATA.runs.filter(r => typeof r.totalScore === 'number');
+      const rubricKeys = Object.keys(rubricLabels);
+      new Chart(document.getElementById('rubricChart'), {
+        type: 'radar',
+        data: {
+          labels: rubricKeys.map(k => rubricLabels[k]),
+          datasets: scored.slice(-4).map(run => ({
+            label: `${run.agent} · ${taskShort(run.taskId)}`,
+            data: rubricKeys.map(k => run.scores?.[k] ?? 0),
+            borderColor: agentColors[run.agent] || '#75675B',
+            backgroundColor: agentSoft[run.agent] || 'rgba(117,103,91,.15)',
+            pointRadius: 2
+          }))
+        },
+        options: {
+          responsive: true,
+          scales: { r: { min: 0, max: 3, ticks: { stepSize: 1 }, grid: { color: 'rgba(117,103,91,.18)' }, angleLines: { color: 'rgba(117,103,91,.18)' } } },
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+
+      new Chart(document.getElementById('diffChart'), {
+        type: 'bubble',
+        data: {
+          datasets: scored.map(run => ({
+            label: `${run.agent} · ${taskShort(run.taskId)}`,
+            data: [{ x: run.automatedChecks.filesChanged, y: run.totalScore, r: Math.max(6, Math.min(26, (run.automatedChecks.linesAdded + run.automatedChecks.linesRemoved) / 12)) }],
+            backgroundColor: agentSoft[run.agent] || 'rgba(117,103,91,.15)',
+            borderColor: agentColors[run.agent] || '#75675B',
+            borderWidth: 2
+          }))
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: { title: { display: true, text: 'Files changed' }, beginAtZero: true, grid: { color: 'rgba(117,103,91,.16)' } },
+            y: { title: { display: true, text: 'Human score /24' }, beginAtZero: true, max: 24, grid: { color: 'rgba(117,103,91,.16)' } }
+          },
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+
+    renderSummary();
+    renderTable();
+    renderTaskCards();
+    initCharts();
+  </script>
+</body>
+</html>
