@@ -169,15 +169,15 @@
       <section class="rounded-[1.75rem] border border-dashed border-line bg-parchment/70 p-6 shadow-card">
         <div class="grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Screenshot plan</p>
-            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Slots are ready; real simulator captures come next.</h2>
-            <p class="mt-4 text-sm leading-6 text-muted">The dashboard already renders screenshot placeholders by run. Next pass: capture Mira screens from the simulator and drop images into each run’s screenshots directory.</p>
+            <p class="text-xs font-bold uppercase tracking-[0.20em] text-ember">Screenshot evidence</p>
+            <h2 class="mt-2 font-serif text-3xl tracking-[-0.03em]">Simulator captures are now attached to the run artifacts.</h2>
+            <p class="mt-4 text-sm leading-6 text-muted">TasteBench recreates each agent run in a temporary worktree, applies its diff, launches Mira in the simulator, and captures screen evidence into each run’s screenshots directory.</p>
           </div>
           <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
-            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Today</span></div>
-            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Journal</span></div>
-            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Entry</span></div>
-            <div class="screenshot-slot aspect-[9/16] rounded-[1.5rem] border border-line p-3"><span class="text-xs font-semibold text-muted">Settings</span></div>
+            <div class="rounded-[1.5rem] border border-line bg-cream p-4"><p class="text-2xl font-semibold">14</p><p class="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-muted">screens captured</p></div>
+            <div class="rounded-[1.5rem] border border-line bg-cream p-4"><p class="text-2xl font-semibold">5</p><p class="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-muted">dark-mode views</p></div>
+            <div class="rounded-[1.5rem] border border-line bg-cream p-4"><p class="text-2xl font-semibold">2</p><p class="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-muted">agents compared</p></div>
+            <div class="rounded-[1.5rem] border border-line bg-cream p-4"><p class="text-2xl font-semibold">1</p><p class="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-muted">repeatable script</p></div>
           </div>
         </div>
       </section>
@@ -216,6 +216,37 @@
       return 'bg-cream text-muted border-line';
     };
     const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const screenshotBase = (run) => '../' + run.resultPath.replace('/result.json', '/screenshots/');
+    function screenshotCandidates(run) {
+      if (run.taskId === '003-dark-mode-fidelity') {
+        return [
+          ['Today', 'result-dark-today.png'],
+          ['Journal', 'result-dark-journal.png'],
+          ['Entry', 'result-dark-entry-detail.png'],
+          ['New entry', 'result-dark-new-entry.png'],
+          ['Settings', 'result-dark-settings.png']
+        ];
+      }
+      if (run.taskId === '002-journal-empty-state') {
+        return [['Empty Journal', 'result-light-journal-empty.png']];
+      }
+      if (run.taskId === '001-add-settings-screen') {
+        return [['Settings', 'result-light-settings.png'], ['Today entry', 'result-light-today.png']];
+      }
+      return [];
+    }
+    function screenshotGrid(run) {
+      const shots = screenshotCandidates(run);
+      if (!shots.length) return `<div class="mt-4 screenshot-slot aspect-[9/16] rounded-2xl border border-line p-3"><span class="text-[11px] font-semibold text-muted">Screenshot pending</span></div>`;
+      const cols = shots.length === 1 ? 'grid-cols-1' : 'grid-cols-2';
+      return `<div class="mt-4 grid ${cols} gap-2">${shots.map(([label, file]) => {
+        const src = screenshotBase(run) + file;
+        return `<figure class="screenshot-slot relative aspect-[9/16] overflow-hidden rounded-2xl border border-line bg-cream">
+          <img src="${src}" alt="${escapeHtml(run.agent)} ${escapeHtml(run.taskName)} ${escapeHtml(label)} screenshot" class="h-full w-full object-cover object-top" onerror="this.style.display='none'" />
+          <figcaption class="absolute bottom-2 left-2 rounded-full bg-ink/75 px-2 py-1 text-[10px] font-semibold text-cream backdrop-blur">${escapeHtml(label)}</figcaption>
+        </figure>`;
+      }).join('')}</div>`;
+    }
 
     function renderSummary() {
       const s = DATA.summary;
@@ -288,10 +319,7 @@
                     </div>
                     <span class="rounded-full border px-2 py-1 text-[11px] font-semibold ${shipClass(run.shipReadiness)}">${escapeHtml(run.shipReadiness || 'pending')}</span>
                   </div>
-                  <div class="mt-4 grid grid-cols-2 gap-2">
-                    <div class="screenshot-slot aspect-[9/16] rounded-2xl border border-line p-3"><span class="text-[11px] font-semibold text-muted">Before</span></div>
-                    <div class="screenshot-slot aspect-[9/16] rounded-2xl border border-line p-3"><span class="text-[11px] font-semibold text-muted">After</span></div>
-                  </div>
+                  ${screenshotGrid(run)}
                   <p class="mt-4 line-clamp-4 text-sm leading-6 text-muted">${escapeHtml(run.summary)}</p>
                 </div>`).join('')}
             </div>
