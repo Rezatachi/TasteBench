@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TasteBench X Card — 1920×1080</title>
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --ink: #12100d;
+      --muted: #6e665d;
+      --hairline: #a6a493;
+      --warm: #a0522d;
+      --moss: #737c4d;
+      --cream: #f4eee4;
+      --card: #fffdf8;
+      --soft: #e8ddd0;
+      --bad: #9d3f31;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #d8d8d8;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      color: var(--ink);
+    }
+    .frame {
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 78% 25%, rgba(160,82,45,.045), transparent 360px),
+        radial-gradient(circle at 92% 72%, rgba(115,124,77,.06), transparent 420px),
+        var(--paper);
+      padding: 104px 108px 78px 108px;
+    }
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: .14;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.11'/%3E%3C/svg%3E");
+    }
+    .layout {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 72px;
+    }
+    .eyebrow {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin: 0 0 36px;
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", "Iowan Old Style", serif;
+      font-weight: 500;
+      font-size: 154px;
+      line-height: .88;
+      letter-spacing: -.075em;
+      margin: 0;
+      max-width: 780px;
+    }
+    .deckline {
+      margin-top: 58px;
+      max-width: 720px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      line-height: 1.5;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .hook {
+      display: inline;
+      background: linear-gradient(transparent 59%, rgba(160,82,45,.16) 0);
+    }
+    .metrics {
+      margin-top: 68px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 760px;
+    }
+    .metric {
+      border-top: 1px solid var(--hairline);
+      padding-top: 18px;
+    }
+    .metric strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 54px;
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: -.05em;
+    }
+    .metric span {
+      display: block;
+      margin-top: 10px;
+      font-size: 18px;
+      line-height: 1.35;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+    }
+    .right {
+      position: relative;
+      padding-top: 16px;
+    }
+    .sketch-ring {
+      position: absolute;
+      right: 22px;
+      top: 0;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      opacity: .58;
+      background:
+        repeating-radial-gradient(circle at 50% 48%, transparent 0 34px, rgba(46,37,30,.08) 35px 36px),
+        conic-gradient(from 5deg, rgba(46,37,30,.0), rgba(46,37,30,.16), rgba(46,37,30,.0), rgba(46,37,30,.12), rgba(46,37,30,.0));
+      mask: radial-gradient(circle, transparent 0 38%, #000 39% 68%, transparent 69%);
+      transform: rotate(-12deg);
+    }
+    .panel {
+      position: relative;
+      margin-top: 88px;
+      margin-left: 54px;
+      width: 735px;
+      border: 1px solid rgba(166,164,147,.68);
+      background: rgba(255,253,248,.88);
+      box-shadow: 0 30px 80px rgba(65,50,37,.075);
+      padding: 34px;
+    }
+    .panel::before, .panel::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(166,164,147,.45);
+      pointer-events: none;
+    }
+    .panel::before { inset: 10px; }
+    .panel::after { display: none; }
+    .panel-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--soft);
+      padding-bottom: 22px;
+      margin-bottom: 26px;
+    }
+    .panel-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 44px;
+      letter-spacing: -.045em;
+      line-height: 1.02;
+      max-width: 430px;
+    }
+    .tag {
+      border: 1px solid var(--soft);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--muted);
+      background: var(--paper);
+      white-space: nowrap;
+    }
+    .score-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .score-card {
+      border: 1px solid rgba(232,221,208,.78);
+      background: var(--paper);
+      padding: 20px;
+      min-height: 142px;
+    }
+    .agent {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 999px; background: var(--warm); }
+    .dot.moss { background: var(--moss); }
+    .big-score {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 52px;
+      line-height: 1;
+      letter-spacing: -.045em;
+    }
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+    .bars {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+    }
+    .bar-line {
+      display: grid;
+      grid-template-columns: 170px 1fr 62px;
+      align-items: center;
+      gap: 14px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .bar-track {
+      height: 12px;
+      background: #eee6da;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; background: var(--warm); border-radius: inherit; }
+    .bar-fill.moss { background: var(--moss); }
+    .bar-fill.bad { background: var(--bad); }
+    .screens {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .phone {
+      height: 202px;
+      border: 1px solid var(--soft);
+      background: #111;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: saturate(.94) contrast(.98);
+    }
+    .bottom-line {
+      position: absolute;
+      left: 108px;
+      right: 108px;
+      bottom: 76px;
+      height: 1px;
+      background: var(--hairline);
+      opacity: .9;
+    }
+    .footer {
+      position: absolute;
+      z-index: 2;
+      left: 108px;
+      right: 108px;
+      bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 22px;
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame" role="img" aria-label="TasteBench social card for X.com, showing the headline metric that all six AI coding agent runs passed build and tests but one failed product review.">
+    <div class="grain"></div>
+    <div class="layout">
+      <section>
+        <p class="eyebrow">TasteBench / First Snapshot</p>
+        <h1>Evaluating agents for product taste</h1>
+        <p class="deckline"><span class="hook">6/6 runs passed build + tests.</span><br>But one still failed<br>product review.</p>
+        <div class="metrics" aria-label="Headline TasteBench metrics">
+          <div class="metric"><strong>3</strong><span>Product/design tasks</span></div>
+          <div class="metric"><strong>20.6</strong><span>Average human score /24</span></div>
+          <div class="metric"><strong>14</strong><span>Simulator screenshots</span></div>
+        </div>
+      </section>
+      <section class="right">
+        <div class="sketch-ring"></div>
+        <div class="panel">
+          <div class="panel-head">
+            <div class="panel-title">The dashboard separates automation from taste.</div>
+            <div class="tag">Mira / SwiftUI</div>
+          </div>
+          <div class="score-row">
+            <div class="score-card">
+              <div class="agent"><span class="dot"></span>Codex</div>
+              <div class="big-score">23/24</div>
+              <div class="note">Best dark-mode fidelity: clean token ownership.</div>
+            </div>
+            <div class="score-card">
+              <div class="agent"><span class="dot moss"></span>Hermes</div>
+              <div class="big-score">20.5/24</div>
+              <div class="note">Good direction; raw color usage needed cleanup.</div>
+            </div>
+          </div>
+          <div class="bars">
+            <div class="bar-line"><span>Build + tests</span><div class="bar-track"><div class="bar-fill moss" style="width:100%"></div></div><strong>6/6</strong></div>
+            <div class="bar-line"><span>Product blocked</span><div class="bar-track"><div class="bar-fill bad" style="width:17%"></div></div><strong>1</strong></div>
+            <div class="bar-line"><span>Raw colors</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><strong>0 vs 28</strong></div>
+          </div>
+          <div class="screens">
+            <div class="phone"><img src="assets/task003-codex-dark-today.png" alt="Codex Task 003 dark-mode Today screenshot"></div>
+            <div class="phone"><img src="assets/task003-hermes-dark-today.png" alt="Hermes Task 003 dark-mode Today screenshot"></div>
+            <div class="phone"><img src="assets/task002-hermes-empty.png" alt="Hermes Task 002 empty-state screenshot"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="bottom-line"></div>
+    <div class="footer"><span>github.com/Rezatachi/TasteBench</span><span>Build/test pass is not product quality</span></div>
+  </div>
+</body>
+</html>
