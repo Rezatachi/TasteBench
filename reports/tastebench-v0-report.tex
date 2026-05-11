@@ -7,6 +7,7 @@
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{xurl}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -53,6 +54,10 @@
 \newcommand{\shipyes}{\textcolor{TasteGreen}{yes}}
 \newcommand{\shipno}{\textcolor{TasteRed}{no}}
 
+\newcommand{\repourl}[1]{https://github.com/Rezatachi/TasteBench/blob/main/#1}
+\newcommand{\pngsource}[2]{\href{\repourl{#1}}{\scriptsize\textcolor{TasteMuted}{#2}}}
+\newcommand{\linkedimage}[3]{\href{\repourl{#1}}{\includegraphics[#2]{#3}}}
+
 \title{\vspace{-2em}\Huge\bfseries TasteBench v0\\[0.25em]\Large Evaluating AI Coding Agents for Product Taste}
 \author{Abraham Belayneh}
 \date{May 2026}
@@ -82,8 +87,8 @@ TasteBench is a small benchmark for evaluating whether AI coding agents can make
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.96\textwidth,height=0.72\textheight,keepaspectratio]{assets/dashboard-preview.png}
-  \caption{TasteBench dashboard showing run metrics, human score charts, and the automation-vs-human-review thesis.}
+  \linkedimage{reports/assets/dashboard-preview.png}{width=0.96\textwidth,height=0.72\textheight,keepaspectratio}{assets/dashboard-preview.png}
+  \caption{TasteBench dashboard showing run metrics, human score charts, and the automation-vs-human-review thesis. Click the image to open the source PNG.}
 \end{figure}
 
 \section{Motivation}
@@ -174,8 +179,8 @@ The blocking issues were product-quality issues rather than compiler failures: s
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.28\textwidth]{assets/task001-codex-settings.png}
-  \caption{Task 001 Codex Settings screenshot. The run passed automation but failed product-quality review.}
+  \linkedimage{runs/codex/001-add-settings-screen/screenshots/result-light-settings.png}{width=0.28\textwidth}{assets/task001-codex-settings.png}
+  \caption{Task 001 Codex Settings screenshot. The run passed automation but failed product-quality review. Click the image to open the source PNG.}
 \end{figure}
 
 \section{Case Study 2: Small Diff, Meaningful Taste Difference}
@@ -199,16 +204,16 @@ Hermes reviewed slightly better because the copy and hierarchy felt calmer and l
   \centering
   \begin{subfigure}{0.42\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{assets/task002-codex-empty.png}
+    \linkedimage{runs/codex/002-journal-empty-state/screenshots/result-light-journal-empty.png}{width=0.9\linewidth}{assets/task002-codex-empty.png}
     \caption{Codex, 21.7/24}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.42\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{assets/task002-hermes-empty.png}
+    \linkedimage{runs/hermes/002-journal-empty-state/screenshots/result-light-journal-empty.png}{width=0.9\linewidth}{assets/task002-hermes-empty.png}
     \caption{Hermes, 22.8/24}
   \end{subfigure}
-  \caption{Task 002 empty-state comparison. Both runs passed automation; human review separated copy and hierarchy nuance.}
+  \caption{Task 002 empty-state comparison. Both runs passed automation; human review separated copy and hierarchy nuance. Click either image to open its source PNG.}
 \end{figure}
 
 \section{Case Study 3: Design-System Hygiene}
@@ -232,16 +237,16 @@ Codex centralized mood color selection through the design system and removed raw
   \centering
   \begin{subfigure}{0.42\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{assets/task003-codex-dark-today.png}
+    \linkedimage{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-today.png}{width=0.9\linewidth}{assets/task003-codex-dark-today.png}
     \caption{Codex dark mode, 23/24}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.42\textwidth}
     \centering
-    \includegraphics[width=0.9\linewidth]{assets/task003-hermes-dark-today.png}
+    \linkedimage{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-today.png}{width=0.9\linewidth}{assets/task003-hermes-dark-today.png}
     \caption{Hermes dark mode, 20.5/24}
   \end{subfigure}
-  \caption{Task 003 dark-mode comparison. Both agents improved the app; the winning run preserved design-token ownership more cleanly.}
+  \caption{Task 003 dark-mode comparison. Both agents improved the app; the winning run preserved design-token ownership more cleanly. Click either image to open its source PNG.}
 \end{figure}
 
 \section{Discussion}
@@ -264,6 +269,29 @@ TasteBench v0 is intentionally small. It currently includes one app domain, a sm
 \section{Next Work}
 
 The next benchmark task should test Mira's core writing loop: \textbf{New Entry Writing Flow Polish}. This would evaluate keyboard behavior, save affordance, disabled states, emotional tone, and interaction smoothness. Future dashboard work should add screenshot zoom, richer case-study pages, and a public-facing portfolio report.
+
+
+\section{Visual Evidence Links}
+
+Every screenshot used by the report is backed by a committed PNG artifact. In the PDF, the main figures are clickable. The full PNG index is below:
+
+\begin{itemize}
+  \item \pngsource{reports/assets/dashboard-preview.png}{Dashboard preview PNG}
+  \item \pngsource{runs/codex/001-add-settings-screen/screenshots/result-light-today.png}{Task 001 Codex Today screen PNG}
+  \item \pngsource{runs/codex/001-add-settings-screen/screenshots/result-light-settings.png}{Task 001 Codex Settings screen PNG}
+  \item \pngsource{runs/codex/002-journal-empty-state/screenshots/result-light-journal-empty.png}{Task 002 Codex journal empty-state PNG}
+  \item \pngsource{runs/hermes/002-journal-empty-state/screenshots/result-light-journal-empty.png}{Task 002 Hermes journal empty-state PNG}
+  \item \pngsource{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-today.png}{Task 003 Codex Today dark-mode PNG}
+  \item \pngsource{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-journal.png}{Task 003 Codex Journal dark-mode PNG}
+  \item \pngsource{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-entry-detail.png}{Task 003 Codex Entry Detail dark-mode PNG}
+  \item \pngsource{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-new-entry.png}{Task 003 Codex New Entry dark-mode PNG}
+  \item \pngsource{runs/codex/003-dark-mode-fidelity/screenshots/result-dark-settings.png}{Task 003 Codex Settings dark-mode PNG}
+  \item \pngsource{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-today.png}{Task 003 Hermes Today dark-mode PNG}
+  \item \pngsource{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-journal.png}{Task 003 Hermes Journal dark-mode PNG}
+  \item \pngsource{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-entry-detail.png}{Task 003 Hermes Entry Detail dark-mode PNG}
+  \item \pngsource{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-new-entry.png}{Task 003 Hermes New Entry dark-mode PNG}
+  \item \pngsource{runs/hermes/003-dark-mode-fidelity/screenshots/result-dark-settings.png}{Task 003 Hermes Settings dark-mode PNG}
+\end{itemize}
 
 \section{Public Framing}
 
